@@ -13,6 +13,5 @@ production:
     - npm install --save serverless-python-requirements
   stage: deploy
   script:
-    - cd image_description
     - serverless requirements cleanCache
     - serverless deploy --verbose
