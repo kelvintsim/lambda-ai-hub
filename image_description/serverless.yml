@@ -1,5 +1,5 @@
-app: image_description
-service: image_description
+app: image-description
+service: image-description
 frameworkVersion: '3'
 
 package:
