@@ -10,7 +10,7 @@ production:
   before_script:
     - npm config set prefix /usr/local
     - npm install -g serverless 
-    - npm install -g serverless-compose
+    - npm install serverless-compose
     - npm install --save serverless-python-requirements
   stage: deploy
   script:
