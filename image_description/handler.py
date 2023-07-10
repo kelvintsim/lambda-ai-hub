@@ -1,4 +1,3 @@
-import time
 from typing import TypedDict
 import requests
 from requests.compat import urljoin
