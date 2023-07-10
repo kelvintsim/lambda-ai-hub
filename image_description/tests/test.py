@@ -1,3 +1,5 @@
+import dotenv
+dotenv.load_dotenv()
 from handler import lambda_handler
 
 def main():
