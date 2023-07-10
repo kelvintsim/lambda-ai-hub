@@ -1,0 +1,18 @@
+image: nikolaik/python-nodejs:python3.8-nodejs16
+
+stages:
+  - deploy
+
+services:
+  - docker:18.09-dind
+
+production:
+  before_script:
+    - npm config set prefix /usr/local
+    - npm install -g serverless
+    - npm install --save serverless-python-requirements
+  stage: deploy
+  script:
+    - cd image_description
+    - serverless requirements cleanCache
+    - serverless deploy --verbose

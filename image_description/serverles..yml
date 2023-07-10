@@ -1,0 +1,37 @@
+app: image_description
+service: image_description
+frameworkVersion: '3'
+
+package:
+  exclude:
+    - '!node_modules/**'
+    - '!venv/**'
+    - '!package-lock.json/**'
+    
+plugins:
+  - serverless-python-requirements  
+
+custom:
+  pythonRequirements:
+    pythonBin: python3
+    
+provider:
+  name: aws
+  runtime: python3.8
+  architecture: x86_64
+  region: ap-southeast-1
+  environment: 
+    AZURE_OPENAI_ENDPOINT: https://yoov-ai-dev.openai.azure.com/
+    AZURE_OPENAI_KEY: b56e7d3d68a5455998e1c2a34e2f3fc9
+    AZURE_OPENAI_DEPLOYMENT: chatbot-gpt-35-dev
+    AZURE_VISION_KEY: 6a94184fcec440b3b64f8f0f6524c05d
+    AZURE_VISION_ENDPOINT: https://yoov-computer-vision.cognitiveservices.azure.com/
+
+functions:
+  image_description:
+    handler: handler.lambda_handler
+    events:
+      - http:
+          path: "/image_description"
+          method: post
+          integration: lambda
