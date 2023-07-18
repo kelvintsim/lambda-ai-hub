@@ -70,7 +70,7 @@ def get_lambda_response(description: str) -> dict[str, str]:
     }
 
 def lambda_handler(event: EventDict, context) -> dict[str, str]:
-    url = event["url"]
+    url = event["body"]["url"]
     ocr_json = ocr(url)
     description = ask_description(ocr_json)
     return get_lambda_response(description)

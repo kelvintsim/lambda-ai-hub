@@ -56,7 +56,7 @@ def get_lambda_response(prompt: str) -> dict[str, str]:
     }
 
 def lambda_handler(event: EventDict, context) -> dict[str, str]:
-    type = event["type"]
-    name = event["name"]
+    type = event["body"]["type"]
+    name = event["body"]["name"]
     prompt = ask_prompt(type, name)
     return get_lambda_response(prompt)

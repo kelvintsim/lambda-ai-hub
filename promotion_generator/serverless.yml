@@ -1,5 +1,5 @@
-app: midjourney-prompt
-service: midjourney-prompt
+app: promotion-generator
+service: promotion-generator
 frameworkVersion: '3'
 
 package:
@@ -28,11 +28,10 @@ provider:
     AZURE_VISION_ENDPOINT: ${env:AZURE_VISION_ENDPOINT}
 
 functions:
-  midjourney-prompt:
+  promotion-generator:
     handler: handler.lambda_handler
-    timeout: 10
     events:
       - http:
-          path: "/midjourney_prompt"
+          path: "/promotion_generator"
           method: post
           integration: lambda

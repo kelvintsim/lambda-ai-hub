@@ -3,3 +3,5 @@ services:
     path: ./image_description
   midjourney_prompt:
     path: ./midjourney_prompt
+  promotion-generator:
+    path: ./promotion-generator
