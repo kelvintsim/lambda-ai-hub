@@ -1,7 +1,7 @@
 services:
   image-description:
-    path: ./image_description
+    path: ./services/image_description
   midjourney_prompt:
-    path: ./midjourney_prompt
+    path: ./services/midjourney_prompt
   promotion-generator:
-    path: ./promotion_generator
+    path: ./services/promotion_generator
