@@ -27,15 +27,15 @@ def ask_name(current_date: str) -> str:
     )
     
     sample_response_1 = (
-        "start_date: 25-12-2023", "end_date: 29-12-2023", "start_time: 18:00", "end_time: 20:00", "days: Saturday, Sunday", "event_name: 聖誕周末盛宴"
+        "start_date: 25-12-2023, end_date: 29-12-2023, start_time: 18:00, end_time: 20:00, days: Saturday, Sunday, event_name: 聖誕周末盛宴"
     )
     
     sample_response_2 = (
-        "start_date: 13-08-2023", "end_date: 17-08-2023", "start_time: 13:00", "end_time: 15:00", "days: Monday, Tuesday, Thursday, Saturday", "event_name: 盛夏狂歡美食節"
+        "start_date: 13-08-2023, end_date: 17-08-2023, start_time: 13:00, end_time: 15:00, days: Monday, Tuesday, Thursday, Saturday, event_name: 盛夏狂歡美食節"
     )
     
     sample_response_3 = (
-        "start_date: 22-8-2023", "end_date: 09-09-2023", "start_time: 11:00", "end_time: 14:00", "days: Saturday, Sunday", "event_name: 中秋美食節"
+        "start_date: 22-8-2023, end_date: 09-09-2023, start_time: 11:00, end_time: 14:00, days: Saturday, Sunday, event_name: 中秋美食節"
     )    
     
     user_prompt = (
