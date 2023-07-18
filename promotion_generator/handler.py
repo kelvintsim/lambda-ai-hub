@@ -32,21 +32,22 @@ def ask_name(start_date: str, end_date: str, start_time: str, end_time: str, day
     )
     
     user_prompt = (
-        "Generate a 'traditional chinese' promotion event name within 10 words for a restaurant base on the following period of date range, time range and days: \n"
+        "You are now a marketing manager, please provide a 'traditional chinese' promotion event name within 10 words for a restaurant base on the following period of date range, time range and days: \n"
         f"""
         date_range: {start_date} - {end_date}
         time_range: {start_time} - {end_time}
         days: {days}
         """
     )
+    
     chatgpt_data = {
         "messages": [
             {"role": "user", "content": sample_user_prompt},
-            {"role": "system", "content": sample_response},
+            {"role": "assistant", "content": sample_response},
             {"role": "user", "content": user_prompt},
         ],
         "max_tokens": 800,
-        "temperature": 0.2,
+        "temperature": 0.7,
         "frequency_penalty": 0,
         "presence_penalty": 0,
         "stop": None
