@@ -17,6 +17,20 @@ def ask_name(start_date: str, end_date: str, start_time: str, end_time: str, day
         "Content-Type": "application/json",
         "api-key": Config.AZURE_OPENAI_KEY
     }
+    
+    sample_user_prompt = (
+        "Generate a 'traditional chinese' promotion event name within 10 words for a restaurant base on the following period of date range, time range and days: \n"
+        f"""
+        date_range: 25-12-2023 - 20-12-2023
+        time_range: 13:00 - 15:00
+        days: Monday, Tuesday, Wednesday, Thursday, Friday
+        """
+    )
+    
+    sample_response = (
+        "聖誕美食工作日盛宴"
+    )
+    
     user_prompt = (
         "Generate a 'traditional chinese' promotion event name within 10 words for a restaurant base on the following period of date range, time range and days: \n"
         f"""
@@ -25,15 +39,11 @@ def ask_name(start_date: str, end_date: str, start_time: str, end_time: str, day
         days: {days}
         """
     )
-    
-    sample_response = (
-        "聖誕美食工作日盛宴"
-    )
-    
     chatgpt_data = {
         "messages": [
+            {"role": "user", "content": sample_user_prompt},
+            {"role": "system", "content": sample_response},
             {"role": "user", "content": user_prompt},
-            {"role": "system", "content": sample_response}
         ],
         "max_tokens": 800,
         "temperature": 0.2,
