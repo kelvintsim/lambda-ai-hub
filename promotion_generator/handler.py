@@ -18,25 +18,17 @@ def ask_name(start_date: str, end_date: str, start_time: str, end_time: str, day
         "api-key": Config.AZURE_OPENAI_KEY
     }
     user_prompt = (
-        "Generate a promotion 'traditional chinese' event name with 10 words for a restaurant base on the following period of date range, time range and days: \n"
+        "Generate a 'traditional chinese' promotion event name with 10 words for a restaurant base on the following period of date range, time range and days: \n"
         f"""
         date_range: {start_date} - {end_date}
         time_range: {start_time} - {end_time}
         days: {days}
         """
     )
-    sample_response = (
-        "中華美食工作日盛宴, "
-        "尊享中式午茶時光, "
-        "黄金蝦仁周中宴, "
-        "節日美饌周日珍宴, "
-        "聖夜之星美食之旅, "
-    )
 
     chatgpt_data = {
         "messages": [
-            {"role": "user", "content": user_prompt},
-            {"role": "assistant", "content": sample_response},
+            {"role": "user", "content": user_prompt}
         ],
         "max_tokens": 800,
         "temperature": 0.2,
