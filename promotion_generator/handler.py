@@ -1,5 +1,6 @@
 from typing import TypedDict
 import requests
+import datetime
 from requests.compat import urljoin
 from config import Config
 
@@ -9,7 +10,7 @@ class EventDict(TypedDict):
     name: str
 
 
-def ask_name(start_date: str, end_date: str, start_time: str, end_time: str, days: str) -> str:
+def ask_name(current_date: str) -> str:
     chatgpt_path = f"openai/deployments/{Config.AZURE_OPENAI_DEPLOYMENT}/chat/completions?api-version=2023-05-15"
     endpoint = Config.AZURE_OPENAI_ENDPOINT
     chatgpt_url = urljoin(endpoint, chatgpt_path)
@@ -19,24 +20,27 @@ def ask_name(start_date: str, end_date: str, start_time: str, end_time: str, day
     }
     
     sample_user_prompt = (
-        "Generate a 'traditional chinese' promotion event name within 10 words for a restaurant base on the following period of date range, time range and days: \n"
+        "You are now a marketing manager from a restaurant, base on the current date, you have to generate a upcoming promotional event name in traditional chinese for the restaurant with the date and time range, also please specify the days for the event, please try to decide a event that fit with any upcoming festival."
         f"""
-        date_range: 25-12-2023 - 20-12-2023
-        time_range: 13:00 - 15:00
-        days: Monday, Tuesday, Wednesday, Thursday, Friday
+        current_date: 18-12-2023
         """
     )
     
     sample_response = (
-        "聖誕美食工作日盛宴"
+        f"""
+        "start_date": "25-12-2023",
+        "end_date": "29-12-2023",
+        "start_time": "18:00",
+        "end_time": "20:00",
+        "days": "Saturday, Sunday"
+        "event_name": "聖誕周末盛宴"
+        """
     )
     
     user_prompt = (
         "You are now a marketing manager, please provide a 'traditional chinese' promotion event name within 10 words for a restaurant base on the following period of date range, time range and days: \n"
         f"""
-        date_range: {start_date} - {end_date}
-        time_range: {start_time} - {end_time}
-        days: {days}
+        current_date: {current_date}
         """
     )
     
@@ -64,10 +68,6 @@ def get_lambda_response(name: str) -> dict[str, str]:
     
 
 def lambda_handler(event: EventDict, context) -> dict[str, str]:
-    start_date = event["body"]["start_date"]
-    end_date = event["body"]["end_date"]
-    start_time = event["body"]["start_time"]
-    end_time = event["body"]["end_time"]
-    days = event["body"]["days"]
-    name = ask_name(start_date, end_date, start_time, end_time, days)
+    current_date = datetime.datetime.now()
+    name = ask_name(current_date)
     return get_lambda_response(name)
