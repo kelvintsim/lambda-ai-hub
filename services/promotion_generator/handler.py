@@ -27,16 +27,17 @@ def ask_name(current_date: str) -> str:
     )
     
     sample_response_1 = (
-        "start_date": "25-12-2023", "end_date": "29-12-2023", "start_time": "18:00", "end_time": "20:00", "days": "Saturday, Sunday", "event_name": "聖誕周末盛宴"
+        "start_date: 25-12-2023", "end_date: 29-12-2023", "start_time: 18:00", "end_time: 20:00", "days: Saturday, Sunday", "event_name: 聖誕周末盛宴"
     )
     
     sample_response_2 = (
-        "start_date": "13-08-2023", "end_date": "17-08-2023", "start_time": "13:00", "end_time": "15:00", "days": "Monday, Tuesday, Thursday, Saturday" "event_name": "盛夏狂歡美食節"
+        "start_date: 13-08-2023", "end_date: 17-08-2023", "start_time: 13:00", "end_time: 15:00", "days: Monday, Tuesday, Thursday, Saturday", "event_name: 盛夏狂歡美食節"
     )
     
     sample_response_3 = (
-        "start_date": "22-8-2023", "end_date": "09-09-2023", "start_time": "11:00", "end_time": "14:00", "days": "Saturday, Sunday" "event_name": "中秋美食節"
+        "start_date: 22-8-2023", "end_date: 09-09-2023", "start_time: 11:00", "end_time: 14:00", "days: Saturday, Sunday", "event_name: 中秋美食節"
     )    
+    
     user_prompt = (
         "You are now a marketing manager from a restaurant, base on the current date, you have to generate a upcoming promotional event name with start_date, end_date, start_time, end_time and days each week in traditional chinese for the restaurant, please try to decide a event that fit with any upcoming festival."
         f"""
