@@ -20,7 +20,7 @@ def ask_name(current_date: str) -> str:
     }
     
     sample_user_prompt = (
-        "You are now a marketing manager from a restaurant, base on the current date, you have to generate a upcoming promotional event name in traditional chinese for the restaurant with the date and time range, also please specify the days for the event, please try to decide a event that fit with any upcoming festival."
+        "You are now a marketing manager from a restaurant, base on the current date, you have to generate a upcoming promotional event name with start_date, end_date, start_time, end_time and days each week in traditional chinese for the restaurant, please try to decide a event that fit with any upcoming festival."
         f"""
         current_date: 18-12-2023
         """
