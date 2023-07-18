@@ -45,7 +45,9 @@ def ask_name(start_date: str, end_date: str, start_time: str, end_time: str, day
         "stop": None
     }
     chatgpt_response = requests.post(chatgpt_url, headers=chatgpt_headers, json=chatgpt_data)
-    return chatgpt_response
+    chatgpt_message = chatgpt_response.json()["choices"][0]["message"]["content"]
+    event_name = chatgpt_message.strip('"')
+    return event_name
 
 def get_lambda_response(name: str) -> dict[str, str]:
     return {
