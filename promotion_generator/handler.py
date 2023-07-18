@@ -54,7 +54,10 @@ def get_lambda_response(name: str) -> dict[str, str]:
     
 
 def lambda_handler(event: EventDict, context) -> dict[str, str]:
-    type = event["type"]
-    name = event["name"]
-    prompt = ask_name(type, name)
-    return get_lambda_response(prompt)
+    start_date = event["body"]["start_date"]
+    end_date = event["body"]["end_date"]
+    start_time = event["body"]["start_time"]
+    end_time = event["body"]["end_time"]
+    days = event["body"]["days"]
+    name = ask_name(start_date, end_date, start_time, end_time, days)
+    return get_lambda_response(name)

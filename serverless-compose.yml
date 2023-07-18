@@ -4,4 +4,4 @@ services:
   midjourney_prompt:
     path: ./midjourney_prompt
   promotion-generator:
-    path: ./promotion-generator
+    path: ./promotion_generator
