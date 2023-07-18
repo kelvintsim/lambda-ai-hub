@@ -62,10 +62,7 @@ def ask_name(current_date: str) -> str:
     return event_name
 
 def get_lambda_response(name: str) -> dict[str, str]:
-    return {
-        "promotion_name": name
-    }
-    
+    return name
 
 def lambda_handler(event: EventDict, context) -> dict[str, str]:
     current_date = datetime.datetime.now()
