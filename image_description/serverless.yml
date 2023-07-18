@@ -21,11 +21,11 @@ provider:
   architecture: x86_64
   region: ap-southeast-1
   environment: 
-    AZURE_OPENAI_ENDPOINT: https://yoov-ai-dev.openai.azure.com/
-    AZURE_OPENAI_KEY: b56e7d3d68a5455998e1c2a34e2f3fc9
-    AZURE_OPENAI_DEPLOYMENT: chatbot-gpt-35-dev
-    AZURE_VISION_KEY: 6a94184fcec440b3b64f8f0f6524c05d
-    AZURE_VISION_ENDPOINT: https://yoov-computer-vision.cognitiveservices.azure.com/
+    AZURE_OPENAI_ENDPOINT: ${env:AZURE_OPENAI_ENDPOINT}
+    AZURE_OPENAI_KEY: ${env:AZURE_OPENAI_KEY}
+    AZURE_OPENAI_DEPLOYMENT: ${env:AZURE_OPENAI_DEPLOYMENT}
+    AZURE_VISION_KEY: ${env:AZURE_VISION_KEY}
+    AZURE_VISION_ENDPOINT: ${env:AZURE_VISION_ENDPOINT}
 
 functions:
   image_description:
