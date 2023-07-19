@@ -30,6 +30,7 @@ provider:
 functions:
   image_description:
     handler: handler.lambda_handler
+    timeout: 10
     events:
       - http:
           path: "/image_description"
