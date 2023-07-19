@@ -1,5 +1,5 @@
-app: background_search
-service: background_search
+app: background-search
+service: background-search
 frameworkVersion: '3'
 
 package:
