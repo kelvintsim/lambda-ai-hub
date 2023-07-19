@@ -7,3 +7,5 @@ services:
     path: ./services/promotion_generator
   item_description:
     path: ./services/item_description
+  background_search:
+    path: ./services/background_search
