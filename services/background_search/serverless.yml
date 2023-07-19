@@ -1,5 +1,5 @@
-app: company-name
-service: company-name
+app: background_search
+service: background_search
 frameworkVersion: '3'
 
 package:
@@ -28,11 +28,11 @@ provider:
     AZURE_VISION_ENDPOINT: ${env:AZURE_VISION_ENDPOINT}
 
 functions:
-  company-name:
+  background_search:
     handler: handler.lambda_handler
     timeout: 10
     events:
       - http:
-          path: "/company_name"
+          path: "/background_search"
           method: post
           integration: lambda
