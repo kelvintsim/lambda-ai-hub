@@ -27,15 +27,18 @@ def ask_name(current_date: str) -> str:
     )
     
     sample_response_1 = (
-        "start_date: 25-12-2023, end_date: 29-12-2023, start_time: 18:00, end_time: 20:00, days: Saturday, Sunday, event_name: 聖誕周末盛宴, event_description: 歡慶聖誕，美食豐盛。聖誕周末盛宴，美味佳餚等您共享！快來品味節慶狂歡！"
+        '{"start_date": "25-12-2023", "end_date": "29-12-2023", "start_time": "18:00", "end_time": "20:00", "days": "Saturday, Sunday, event_name": "聖誕周末盛宴", "event_description": "歡慶聖誕，美食豐盛。聖誕周末盛宴，美味佳餚等您共享！快來品味節慶狂歡！"}'
+
     )
     
     sample_response_2 = (
-        "start_date: 13-08-2023, end_date: 17-08-2023, start_time: 13:00, end_time: 15:00, days: Monday, Tuesday, Thursday, Saturday, event_name: 盛夏狂歡美食節, event_description: 盛夏狂歡美食節，炎炎夏日，美味佳餚等您來品嚐！共享美食盛宴，不容錯過！"
+        '{"start_date": "13-08-2023", "end_date": "17-08-2023", "start_time": "13:00", "end_time": "15:00", "days": "Monday, Tuesday, Thursday, Saturday", "event_name": "盛夏狂歡美食節", "event_description": "盛夏狂歡美食節，炎炎夏日，美味佳餚等您來品嚐！共享美食盛宴，不容錯過！"}'
+
     )
     
     sample_response_3 = (
-        "start_date: 22-8-2023, end_date: 09-09-2023, start_time: 11:00, end_time: 14:00, days: Saturday, Sunday, event_name: 中秋美食節, event_description: 中秋美食節，圓月下，品嚐豐盛佳餚。家人朋友齊聚，共度溫馨時光。不容錯過的節日盛事！"
+        '{"start_date": "22-8-2023", "end_date": "09-09-2023", "start_time": "11:00", "end_time": "14:00", "days": "Saturday, Sunday", "event_name": "中秋美食節", "event_description": "中秋美食節，圓月下，品嚐豐盛佳餚。家人朋友齊聚，共度溫馨時光。不容錯過的節日盛事！"}'
+
     )    
     
     user_prompt = (
