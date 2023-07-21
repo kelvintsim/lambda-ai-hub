@@ -1,14 +1,14 @@
-app: promotion-generator
-service: promotion-generator
+app: food-image-generator
+service: food-image-generator
 frameworkVersion: '3'
 
 functions:
-  promotion-generator:
+  food-image-generator:
     handler: handler.lambda_handler
-    timeout: 10
+    timeout: 10    
     events:
       - http:
-          path: "/promotion_generator"
+          path: "/foodimage_generator"
           method: post
           integration: lambda
     
@@ -34,8 +34,7 @@ provider:
     restApiId: jo4yphs17g
     restApiRootResourceId: 9kl7ci3plk
   environment: 
-    AZURE_OPENAI_ENDPOINT: ${env:AZURE_OPENAI_ENDPOINT}
-    AZURE_OPENAI_KEY: ${env:AZURE_OPENAI_KEY}
-    AZURE_OPENAI_DEPLOYMENT: ${env:AZURE_OPENAI_DEPLOYMENT}
-    AZURE_VISION_KEY: ${env:AZURE_VISION_KEY}
-    AZURE_VISION_ENDPOINT: ${env:AZURE_VISION_ENDPOINT}
+    MIDJOURNEY_ACCOUNT: ${env:MIDJOURNEY_ACCOUNT}
+    MIDJOURNEY_PASSWORD: ${env:MIDJOURNEY_PASSWORD}
+    GENERATE_N8N_ENDPOINT: ${env:GENERATE_N8N_ENDPOINT}
+    GET_N8N_ENDPOINT: ${env:GET_N8N_ENDPOINT}
