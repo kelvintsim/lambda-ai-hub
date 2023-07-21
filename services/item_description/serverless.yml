@@ -20,6 +20,9 @@ provider:
   runtime: python3.9
   architecture: x86_64
   region: ap-southeast-1
+  apiGateway:
+    restApiId: jo4yphs17g
+    restApiRootResourceId: 9kl7ci3plk
   environment: 
     AZURE_OPENAI_ENDPOINT: ${env:AZURE_OPENAI_ENDPOINT}
     AZURE_OPENAI_KEY: ${env:AZURE_OPENAI_KEY}
