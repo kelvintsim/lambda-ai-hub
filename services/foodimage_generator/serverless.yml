@@ -3,12 +3,20 @@ service: food-image-generator
 frameworkVersion: '3'
 
 functions:
-  food-image-generator:
-    handler: handler.lambda_handler
+  food-image-generate:
+    handler: handler.genphoto_handler
     timeout: 10    
     events:
       - http:
-          path: "/foodimage_generator"
+          path: "/foodimage_generate"
+          method: post
+          integration: lambda
+  food-image-get:
+    handler: handler.getphoto_handler
+    timeout: 10    
+    events:
+      - http:
+          path: "/foodimage_get"
           method: post
           integration: lambda
     

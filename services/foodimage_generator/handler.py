@@ -26,8 +26,12 @@ def get_photo(taskId: str) -> dict[str, str]:
     image_id = image.json()
     return image_id
 
-def lambda_handler(event: EventDict, context) -> dict[str, str]:
+def genphoto_handler(event: EventDict, context) -> dict[str, str]:
     prompt = event["body"]["prompt"]
     task_id = get_id(prompt)
-    image_id = get_photo(task_id)
+    return task_id
+
+def getphoto_handler(event: EventDict, context) -> dict[str, str]:
+    image = event["body"]["taskId"]
+    image_id = get_photo(image)
     return image_id
