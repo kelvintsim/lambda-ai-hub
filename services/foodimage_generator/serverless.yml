@@ -13,7 +13,7 @@ functions:
           integration: lambda
   food-image-get:
     handler: handler.getphoto_handler
-    timeout: 10    
+    timeout: 20
     events:
       - http:
           path: "/foodimage_get"
