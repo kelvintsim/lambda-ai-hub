@@ -20,7 +20,7 @@ def ask_name(current_date: str) -> str:
     }
     
     sample_user_prompt = (
-        "You are now a marketing manager from a restaurant, for the upcoming three months start from {current_date}, you have to generate a upcoming promotional event name with event_desciption, start_date, end_date, start_time, end_time and days each week in traditional chinese for the restaurant, please try to decide a event that fit with any upcoming festival, if there is not any festivals, please take it as a seasonal event"
+        "You are now a marketing manager from a restaurant, for the upcoming three months start from {current_date}, you have to generate a upcoming promotional event name with event_desciption, start_date, end_date, start_time, end_time and days each week in traditional chinese for the restaurant, please try to decide a event that fit with any upcoming festival"
         f"""
         current_date: 18-12-2023
         """
@@ -42,7 +42,7 @@ def ask_name(current_date: str) -> str:
     )    
     
     user_prompt = (
-        "You are now a marketing manager from a restaurant, for the upcoming three months start from {current_date}, you have to generate a promotional event name with event_desciption, start_date, end_date, start_time, end_time and days each week in traditional chinese for the restaurant, please try to decide a event that fit with any upcoming festival, if there is not any festivals, please take it as a seasonal event"
+        "You are now a marketing manager from a restaurant, for the upcoming three months start from {current_date}, you have to generate a promotional event name with event_desciption, start_date, end_date, start_time, end_time and days each week in traditional chinese for the restaurant, please try to decide a event that fit with any upcoming festival"
         f"""
         current_date: {current_date}
         """
