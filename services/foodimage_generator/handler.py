@@ -16,7 +16,7 @@ get_n8n_url = Config.GET_N8N_ENDPOINT
 def get_id(prompt: str) -> str:
     gen_photo_url = urljoin(gen_n8n_url, prompt)
     response = requests.post(gen_photo_url, auth=(account, password), json={})
-    task = response.json
+    task = response.json()
     task_id = task["taskId"]
     return task_id
 
