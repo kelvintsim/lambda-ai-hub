@@ -18,11 +18,11 @@ def ask_prompt(type: str, name: str) -> str:
         "api-key": Config.AZURE_OPENAI_KEY
     }
     user_prompt = (
-        "Generate a prompt for Midjourney for the following item to generate images of it: \n"
+        "Generate a prompt for Midjourney for the following item to generate images of it, please do not contain the word 'hot' in your prompt: \n"
         f"{type}: {name}"
     )
     sample_user_prompt = (
-         "Generate a prompt for Midjourney for the following item to generate images of it: \n"
+         "Generate a prompt for Midjourney for the following item to generate images of it, please do not contain the word 'hot' in your prompt: \n"
          "Food: 乾炒牛河"
     )
     sample_response = (

@@ -33,7 +33,7 @@ provider:
 functions:
   midjourney-prompt:
     handler: handler.lambda_handler
-    timeout: 10
+    timeout: 20
     events:
       - http:
           path: "/midjourney_prompt"
