@@ -25,18 +25,30 @@ def ask_prompt(type: str, name: str) -> str:
          "Generate a prompt for Midjourney for the following item to generate images of it, please do not contain the word 'hot' in your prompt: \n"
          "Food: 乾炒牛河"
     )
-    sample_response = (
-        "Create vibrant and appetizing images of the popular Chinese dish, 乾炒牛河 (Gon Chao Niu He), "
+    sample_response_1 = (
+        "Create vibrant and appetizing images of the popular Chinese dish, 乾炒牛河 (Dry Fried Beef Hor Fun), "
         "a delicious stir-fried flat rice noodle dish with tender slices of beef, bean sprouts, scallions, "
         "and a savory sauce. Capture the dish in all its glory, showcasing the glossy noodles, "
         "perfectly seared beef, and the vibrant mix of colors from the fresh vegetables. "
         "The images should evoke the enticing aroma and mouthwatering flavors of this classic Cantonese delicacy."
     )
+    
+    sample_response_2 = (
+        f"""
+        Capture the essence of 飯糰(rice ball), a traditional Japanese dish that combines a variety of ingredients such as rice, 
+        vegetables, and protein, all beautifully rolled in a circular shape. 
+        Showcase the vibrant colors and textures of the dish, highlighting the freshness of the vegetables, 
+        the succulence of the protein, and the fluffy grains of rice. 
+        The images should convey the harmony and balance of flavors in this visually appealing and delicious meal.
+        """
+    )
 
     chatgpt_data = {
         "messages": [
             {"role": "user", "content": sample_user_prompt},
-            {"role": "assistant", "content": sample_response},
+            {"role": "assistant", "content": sample_response_1},
+            {"role": "user", "content": sample_user_prompt},
+            {"role": "assistant", "content": sample_response_2},
             {"role": "user", "content": user_prompt},
         ],
         "max_tokens": 800,
