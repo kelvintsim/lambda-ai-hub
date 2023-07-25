@@ -39,6 +39,7 @@ def get_document_data(txt: str):
     Output example 1: (Document is valid, duraiton is 1 day):
     valid: YES
     document_type: Medical Certificate
+    document_format: png
     subject_name: John Peterson
     reason: Cold
     duration: 18/12/2023 - 18/12/2023
@@ -47,6 +48,7 @@ def get_document_data(txt: str):
     Output example 2: (Document is invalid):
     valid: NO
     document_type:
+    document_format:
     subject_name:
     reason:
     duration:
