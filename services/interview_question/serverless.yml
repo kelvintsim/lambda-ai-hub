@@ -33,7 +33,7 @@ provider:
 functions:
   interview-question:
     handler: handler.lambda_handler
-    timeout: 10
+    timeout: 20
     events:
       - http:
           path: "/interview_question"
