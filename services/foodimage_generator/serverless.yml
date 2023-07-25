@@ -5,7 +5,7 @@ frameworkVersion: '3'
 functions:
   food-image-generate:
     handler: handler.genphoto_handler
-    timeout: 10    
+    timeout: 30   
     events:
       - http:
           path: "/foodimage_generate"
@@ -13,7 +13,7 @@ functions:
           integration: lambda
   food-image-get:
     handler: handler.getphoto_handler
-    timeout: 20
+    timeout: 30
     events:
       - http:
           path: "/foodimage_get"
