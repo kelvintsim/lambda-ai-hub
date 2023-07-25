@@ -18,12 +18,12 @@ def ask_questions(role: str) -> str:
         "api-key": Config.AZURE_OPENAI_KEY
     }
     
-    sample_user_prompt = (
+    sample_user_prompt_1 = (
          "You are now a human resources manager, please generate 10 interview questions based on the applied role of the candidate: \n"
          "DevOps Engineer"
     )
     
-    sample_response = (
+    sample_response_1 = (
         """
         {
         "1": "Can you explain the main principles of DevOps and how they contribute to the software development lifecycle?",
@@ -39,6 +39,28 @@ def ask_questions(role: str) -> str:
         }
         """
     )
+
+    sample_user_prompt_2 = (
+         "You are now a human resources manager, please generate 10 interview questions based on the applied role of the candidate: \n"
+         "Customer service officer"
+    )
+
+    sample_response_2 = (
+        """
+        {
+        "1": "Can you describe your previous experience in customer service roles and how it has prepared you for this position?",
+        "2": "How do you handle difficult or irate customers? Can you provide an example of a challenging customer interaction and how you resolved it?",
+        "3": "Effective communication is crucial in customer service. How do you ensure clear and concise communication with customers, both verbally and in writing?",
+        "4": "In a fast-paced customer service environment, how do you prioritize and manage multiple customer inquiries or issues simultaneously?",
+        "5": "Problem-solving skills are essential in customer service. Can you share an example of a complex customer issue you resolved, and the steps you took to reach a satisfactory outcome?",
+        "6": "How do you handle customer complaints? Can you provide an example of a time when you successfully turned a dissatisfied customer into a loyal one?",
+        "7": "Attention to detail is important in customer service to ensure accuracy and avoid errors. How do you ensure accuracy in your work, such as processing orders or updating customer information?",
+        "8": "Technology plays a significant role in modern customer service. What customer service software or tools are you familiar with, and how have you utilized them in your previous roles?",
+        "9": "Empathy is crucial in providing exceptional customer service. How do you demonstrate empathy towards customers, especially in challenging or emotional situations?",
+        "10": "Continuous learning and improvement are important in customer service. How do you stay updated with industry trends and customer service best practices to enhance your skills?"
+        }
+        """
+    )
     
     user_prompt = (
          "You are now a human resources manager, please generate 10 interview questions based on the applied role of the candidate: \n"
@@ -47,8 +69,10 @@ def ask_questions(role: str) -> str:
 
     chatgpt_data = {
         "messages": [
-            {"role": "user", "content": sample_user_prompt},
-            {"role": "assistant", "content": sample_response},
+            {"role": "user", "content": sample_user_prompt_1},
+            {"role": "assistant", "content": sample_response_1},
+            {"role": "user", "content": sample_user_prompt_2},
+            {"role": "assistant", "content": sample_response_2},
             {"role": "user", "content": user_prompt},
         ],
         "max_tokens": 800,
