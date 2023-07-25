@@ -13,3 +13,5 @@ services:
     path: ./services/foodimage_generator
   interview_questions:
     path: ./services/interview_question
+  sick_leave_document:
+    path: ./services/sick_leave_document

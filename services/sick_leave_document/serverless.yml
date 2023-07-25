@@ -1,0 +1,51 @@
+app: sick-leave-document
+service: sick-leave-document
+frameworkVersion: '3'
+
+functions:
+  sick_leave_score:
+    handler: main.score
+    timeout: 30
+    events:
+      - http:
+          path: "/sick_score"
+          method: post
+          integration: lambda
+  sick_leave_document:
+    handler: main.parse
+    timeout: 30
+    events:
+      - http:
+          path: "/sick_document"
+          method: post
+          integration: lambda
+    
+package:
+  exclude:
+    - '!node_modules/**'
+    - '!venv/**'
+    - '!package-lock.json/**'
+    
+plugins:
+  - serverless-python-requirements  
+
+custom:
+  pythonRequirements:
+    pythonBin: python3
+
+provider:
+  name: aws
+  runtime: python3.9
+  architecture: x86_64
+  region: ap-southeast-1
+  apiGateway:
+    restApiId: jo4yphs17g
+    restApiRootResourceId: 9kl7ci3plk
+  environment: 
+    OPENAI_API_BASE: ${env:AZURE_OPENAI_ENDPOINT}
+    OPENAI_API_KEY: ${env:OPENAI_API_KEY}
+    OPENAI_API_TYPE: ${env:OPENAI_API_TYPE}
+    OPENAI_API_VERSION: ${env:OPENAI_API_VERSION}
+    DEPLOYMENT_NAME: ${env:AZURE_OPENAI_DEPLOYMENT}
+    AZURE_VISION_KEY: ${env:AZURE_VISION_KEY}
+    AZURE_VISION_ENDPOINT: ${env:AZURE_VISION_ENDPOINT}
