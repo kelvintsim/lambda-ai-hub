@@ -1,5 +1,5 @@
-app: interview-questions
-service: interview-questions
+app: interview-question
+service: interview-question
 frameworkVersion: '3'
 
 package:
@@ -31,11 +31,11 @@ provider:
     AZURE_VISION_ENDPOINT: ${env:AZURE_VISION_ENDPOINT}
 
 functions:
-  interview-questions:
+  interview-question:
     handler: handler.lambda_handler
     timeout: 10
     events:
       - http:
-          path: "/interview_quetions"
+          path: "/interview_question"
           method: post
           integration: lambda

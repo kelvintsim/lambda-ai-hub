@@ -12,4 +12,4 @@ services:
   foodimage_generator:
     path: ./services/foodimage_generator
   interview_questions:
-    path: ./services/interview_questions
+    path: ./services/interview_question
