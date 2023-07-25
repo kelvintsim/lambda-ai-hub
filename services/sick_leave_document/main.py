@@ -2,7 +2,7 @@ from services import get_document_data, get_score, get_azure_ocr_data
 
 
 def score(event, context):
-    img_path = event.get["body"]["img_path"]
+    img_path = event["body"]["img_path"]
 
     application = event["body"]["application"]
 
@@ -16,7 +16,7 @@ def score(event, context):
 
 
 def parse(event, context):
-    img_path = event.get["body"]["img_path"]
+    img_path = event["body"]["img_path"]
 
     return get_document_data(get_azure_ocr_data(img_path))
 
