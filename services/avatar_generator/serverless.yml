@@ -11,14 +11,6 @@ functions:
           path: "/avatar_generate"
           method: post
           integration: lambda
-  avatar-get:
-    handler: handler.getphoto_handler
-    timeout: 30
-    events:
-      - http:
-          path: "/avatar_get"
-          method: post
-          integration: lambda
     
 package:
   exclude:
