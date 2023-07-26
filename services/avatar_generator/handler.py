@@ -13,7 +13,7 @@ password = Config.MIDJOURNEY_PASSWORD
 
 def get_id(photo: str) -> str:
     gen_n8n_url = Config.AVATAR_N8N_ENDPOINT
-    response = requests.post(gen_n8n_url, auth=(account, password), json={"prompt": f"{photo} Generate a cartoon style avatar, try to keep the facial characteristics"})
+    response = requests.post(gen_n8n_url, auth=(account, password), json={"prompt": f"{photo} Generate a cartoon style avatar for the person, try to keep the appearance as similar as possible"})
     task = response.json()
     task_id = task["taskId"]
     return task_id
