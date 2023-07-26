@@ -20,16 +20,17 @@ def get_id(prompt: str) -> str:
     task_id = task["taskId"]
     return task_id
 
-def get_photo(taskId: str) -> dict[str, str]:
-    get_photo_url = urljoin(get_n8n_url, taskId)
-    image = requests.get(get_photo_url, auth=(account, password), json={})
-    image_id = image.json()
-    return image_id
-
 def genphoto_handler(event: EventDict, context) -> dict[str, str]:
     prompt = event["body"]["prompt"]
     task_id = get_id(prompt)
     return task_id
+
+def get_photo(taskId: str) -> dict[str, str]:
+    get_photo_url = urljoin(get_n8n_url, taskId)
+    image = requests.get(get_photo_url, auth=(account, password), json={})
+    print(image)
+    image_id = image.json()
+    return image_id
 
 def getphoto_handler(event: EventDict, context) -> dict[str, str]:
     image = event["body"]["taskId"]
