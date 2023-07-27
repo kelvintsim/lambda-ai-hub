@@ -3,7 +3,7 @@ service: cv-ocr
 frameworkVersion: '3'
 
 functions:
-  cv_questions:
+  cv_question:
     handler: main.questions
     timeout: 30
     events:
