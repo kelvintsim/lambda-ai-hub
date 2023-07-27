@@ -19,5 +19,3 @@ services:
     path: ./services/avatar_generator
   cv_ocr:
     path: ./services/cv_ocr
-  cv_questions:
-    path: ./services/cv_questions
