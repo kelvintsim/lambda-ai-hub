@@ -37,24 +37,22 @@ def get_document_data(txt: str):
     You have to strictly follow the output format.
 
     Output example 1: (Document is valid, duraiton is 1 day):
-    '{
+    '{{
     "valid": "YES",
     "document_type": "Medical Certificate",
-    "document_format": "png",
     "subject_name": "John Peterson",
     "reason": "Cold",
     "duration": "18/12/2023 - 18/12/2023"
-    }'
+    }}'
 
     Output example 2: (Document is invalid):
-    '{
+    '{{
     "valid": "NO",
     "document_type": "",
-    "document_format": "",
     "subject_name": "",
     "reason": "",
     "duration": ""
-    }'
+    }}'
 
     Information:
     {txt}
@@ -88,24 +86,24 @@ def get_score(application: dict, document_data: str):
     If the document data "Invalid supporting document" return C with reason of invalid supporting document.
     
     Output Example 1:
-    '{
+    '{{
         "grade": "A",
         "reason": ""
-    }'
+    }}'
     === End of example 1
     
     Output Example 2:
-    '{
+    '{{
         "grade": "B",
         "reason": "No subject name in document data"
-    }'
+    }}'
     === End of example 2
     
     Output Example 3:
-    '{
+    '{{
         "grade": "C",
         "reason": "Date doesn't match"
-    }'
+    }}'
     === End of example 3
     
     Lets start!
