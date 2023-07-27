@@ -37,22 +37,24 @@ def get_document_data(txt: str):
     You have to strictly follow the output format.
 
     Output example 1: (Document is valid, duraiton is 1 day):
-    valid: YES
-    document_type: Medical Certificate
-    document_format: png
-    subject_name: John Peterson
-    reason: Cold
-    duration: 18/12/2023 - 18/12/2023
-    === End of example 1
+    '{
+    "valid": "YES",
+    "document_type": "Medical Certificate",
+    "document_format": "png",
+    "subject_name": "John Peterson",
+    "reason": "Cold",
+    "duration": "18/12/2023 - 18/12/2023"
+    }'
 
     Output example 2: (Document is invalid):
-    valid: NO
-    document_type:
-    document_format:
-    subject_name:
-    reason:
-    duration:
-    === End of example 2
+    '{
+    "valid": "NO",
+    "document_type": "",
+    "document_format": "",
+    "subject_name": "",
+    "reason": "",
+    "duration": ""
+    }'
 
     Information:
     {txt}
@@ -82,22 +84,28 @@ def get_score(application: dict, document_data: str):
     C means are you sure the document data is not enough to support the leave application.
     
     First set of data is the sick leave application data. The second set of data is information from the application supporting document. 
-    If the subject's name or applied date doesn't match then you should garde them C.
+    If the subject's name or applied date doesn't match then you should grade them C.
     If the document data "Invalid supporting document" return C with reason of invalid supporting document.
     
     Output Example 1:
-    garde: A
-    reason:
+    '{
+        "grade": "A",
+        "reason": ""
+    }'
     === End of example 1
     
     Output Example 2:
-    garde: B
-    reason: No subject name in document data
+    '{
+        "grade": "B",
+        "reason": "No subject name in document data"
+    }'
     === End of example 2
     
     Output Example 3:
-    garde: C
-    reason: Date doesn't match
+    '{
+        "grade": "C",
+        "reason": "Date doesn't match"
+    }'
     === End of example 3
     
     Lets start!
