@@ -1,17 +1,11 @@
-from services import get_document_data, get_score, get_azure_ocr_data
+from services import get_document_data, get_questions, get_azure_ocr_data
 
 
-def score(event, context):
-    img_path = event["body"]["img_path"]
-
-    application = event["body"]["application"]
-
-    txt = get_azure_ocr_data(img_path)
-
-    document_data = get_document_data(txt)
-
-    response = get_score(application, document_data)
-
+def questions(event, context):
+    role = event["body"]["role"]
+    experience = event["body"]["experience"]
+    education = event["body"]["education"]
+    response = get_questions(experience, education, role)
     return response
 
 

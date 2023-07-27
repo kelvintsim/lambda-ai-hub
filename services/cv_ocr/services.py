@@ -71,51 +71,45 @@ def get_document_data(txt: str):
     return chain.run(txt=txt)
 
 
-def get_score(application: dict, document_data: str):
-    template = """You need to verify 2 sets of data and give grade them. The grade is A, B and C. 
-    A means you are very confident that the document data is enough to support the leave applicatoin. 
-    B means are you not sure the document data is enough or not.
-    C means are you sure the document data is not enough to support the leave application.
-    
-    First set of data is the sick leave application data. The second set of data is information from the application supporting document. 
-    If the subject's name or applied date doesn't match then you should grade them C.
-    If the document data "Invalid supporting document" return C with reason of invalid supporting document.
+def get_questions(experience: str, education: str, role: str):
+    template = """You are now a human resources manager, based on the provided experience and education from the candidate, you
+    have to generate a set of interview questions that can evaluate if the applicant is suitable to the applied role. Please try
+    to think about interview questions that related to the role and can examine the past experience of the candidate. 
+
+    First set of data is the applicant's past job experience. The second set of data is education of the applicant. The third set of data is the applied role of the candidate. 
     
     Output Example 1:
     '{{
-        "grade": "A",
-        "reason": ""
+        "1": "As a Principal Security Consultant, you must have dealt with various security weaknesses in different systems. How do you think this experience will benefit you in the role of a computer scientist, and how would you approach integrating security measures into software development processes?",
+        "2": "In your current position, you've tested a wide range of applications and technologies for security vulnerabilities with high accuracy. How do you plan to leverage your expertise in security testing to ensure the robustness and resilience of computer programs you develop or work with?",
+        "3": "As an AI-focused computer scientist, how have you utilized artificial intelligence and machine learning in your previous projects or security assessments to enhance the identification and mitigation of security risks?",
+        "4": "Tell us about a particularly challenging security issue you encountered during your tenure as a Principal Security Consultant. How did you approach solving it, and what lessons did you learn from the experience that could be applied in computer science research or development?",
+        "5": "Presenting information at conferences demonstrates strong communication and presentation skills. How would you apply these skills in collaborating with other computer scientists or interdisciplinary teams on research projects or software development initiatives?",
+        "6": "Your Master's in Advanced Computer Science with a focus on Artificial Intelligence is an excellent background for this role. How do you envision integrating your AI knowledge into the design and development of innovative computer applications or algorithms?",
+        "7": "In the realm of AI ethics, how do you approach ensuring the responsible use of AI in your projects or applications, particularly when it comes to data privacy and bias mitigation?",
+        "8": "As a computer scientist, problem-solving skills are crucial. Can you share an example of a complex technical problem you encountered in your previous roles, how you tackled it, and what were the outcomes?",
+        "9": "Collaboration and teamwork are often required in computer science research and development. Tell us about an experience where you worked closely with a team to achieve a common goal, and how you contributed to the success of the project.",
+        "10": "Technology is continuously evolving, and keeping up with advancements is vital. How do you stay updated with the latest trends and breakthroughs in both computer science and AI, and how do you see this continuous learning benefiting your future projects?"
     }}'
     === End of example 1
-    
-    Output Example 2:
-    '{{
-        "grade": "B",
-        "reason": "No subject name in document data"
-    }}'
-    === End of example 2
-    
-    Output Example 3:
-    '{{
-        "grade": "C",
-        "reason": "Date doesn't match"
-    }}'
-    === End of example 3
-    
+       
     Lets start!
     
-    Application Data:
-    {application_data}
+    Experience:
+    {experience}
     
-    Document Data:
-    {document_data}
+    Education:
+    {education}
+    
+    applied role:
+    {role}
     
     Output:
     """
 
     prompt = PromptTemplate(
         template=template,
-        input_variables=['application_data', 'document_data']
+        input_variables=['experience', 'education', 'role']
     )
 
     llm = AzureChatOpenAI(
@@ -125,7 +119,7 @@ def get_score(application: dict, document_data: str):
     chain = LLMChain(llm=llm,
                      prompt=prompt, )
 
-    return chain.run(application_data=application, document_data=document_data)
+    return chain.run(experience=experience, education=education, role=role)
 
 
 @dataclass

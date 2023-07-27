@@ -3,14 +3,14 @@ service: cv-ocr
 frameworkVersion: '3'
 
 functions:
-  # sick_leave_score:
-  #   handler: main.score
-  #   timeout: 30
-  #   events:
-  #     - http:
-  #         path: "/sick_score"
-  #         method: post
-  #         integration: lambda
+  cv_questions:
+    handler: main.questions
+    timeout: 30
+    events:
+      - http:
+          path: "/cv_questions"
+          method: post
+          integration: lambda
   cv_ocr:
     handler: main.parse
     timeout: 30
