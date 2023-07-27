@@ -17,3 +17,5 @@ services:
     path: ./services/sick_leave_document
   avatar_generator:
     path: ./services/avatar_generator
+  cv_ocr:
+    path: ./services/cv_ocr
