@@ -6,13 +6,15 @@ def questions(event, context):
     experience = event["body"]["experience"]
     education = event["body"]["education"]
     response = get_questions(experience, education, role)
+    print(response)
     return response
 
 
 def parse(event, context):
     img_path = event["body"]["img_path"]
-
-    return get_document_data(get_azure_ocr_data(img_path))
+    cv_data = get_document_data(get_azure_ocr_data(img_path)) 
+    print(cv_data)
+    return cv_data
 
 
 # class Event:
