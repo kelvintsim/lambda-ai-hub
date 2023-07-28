@@ -14,7 +14,9 @@ def get_experience(cv):
     
 def questions(event, context):
     
-    experience, education = get_experience(event["body"]["img_path"])
+    url = event["body"]["img_path"]
+    
+    experience, education = get_experience(url)
     
     role = event["body"]["role"]
     
