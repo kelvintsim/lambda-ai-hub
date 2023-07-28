@@ -1,8 +1,11 @@
 from services import get_document_data, get_questions, get_azure_ocr_data, cv_summarizer
 import json 
 
-def get_experience(cv):
-    cv_data = get_document_data(get_azure_ocr_data(cv))
+def get_experience(event, context):
+    
+    url = event["body"]["img_path"]
+    
+    cv_data = get_document_data(get_azure_ocr_data(url))
     
     cv_experience = json.loads(cv_data)
     
@@ -10,17 +13,15 @@ def get_experience(cv):
     
     education = cv_experience["educations"]
     
-    return experience, education 
+    ability = cv_summarizer(experience, education)
+    
+    return ability
     
 def questions(event, context):
     
-    url = event["body"]["img_path"]
-    
-    experience, education = get_experience(url)
-    
     role = event["body"]["role"]
     
-    ability = cv_summarizer(experience, education)
+    ability = event["body"]["ability"]
     
     response = get_questions(ability, role)
     

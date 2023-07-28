@@ -3,6 +3,14 @@ service: cv-ocr
 frameworkVersion: '3'
 
 functions:
+  cv_experience:
+    handler: main.get_experience
+    timeout: 60
+    events:
+      - http:
+          path: "/cv_experience"
+          method: post
+          integration: lambda
   cv_question:
     handler: main.questions
     timeout: 60
