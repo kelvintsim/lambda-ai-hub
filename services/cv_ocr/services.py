@@ -78,13 +78,49 @@ def get_document_data(txt: str):
 
     return chain.run(txt=txt)
 
+def cv_summarizer(experience: str, education: str):
+    template = """You are now a human resources manager assistant, based on the provided experience and education from the candidate, you
+    have to summarize the work experience, working knowledge and skills of the applicant. Please try to provide a concise summary of the candidate,
+    in order to help your manager to design a set of questions that could accurately examine the ability of the applicant.
 
-def get_questions(experience: str, education: str, role: str):
-    template = """You are now a human resources manager, based on the provided experience and education from the candidate, you
+    First set of data is the applicant's past job experience. The second set of data is education of the applicant.
+    
+    Output Example:
+    "The applicant has valuable work experience as a Website Intern at Fragrance Unlimited, where they optimized website categories and content, collaborated with a local SEO agency to drive organic traffic, and localized content for the USA market. They also demonstrated proficiency in Google Tag Manager and Google Analytics for tag implementation. Additionally, the applicant exhibited a customer-centric approach in managing the merchandise portfolio. Education-wise, they are pursuing a Master's in Linguistics (expected completion in June 2020) with a 3.85 GPA and hold a Bachelor's degree in Cognitive Science from UCLA with a GPA of 3.9. Their practical skills in website optimization, collaboration, and localization, coupled with a strong academic background, make them a promising candidate. The interview questions should focus on assessing their expertise in SEO practices, content localization, and how their academic knowledge complements their work experience."
+    === End of example 
+       
+    Lets start!
+    
+    Experience:
+    {experience}
+    
+    Education:
+    {education}
+    
+    Output:
+    """
+
+    prompt = PromptTemplate(
+        template=template,
+        input_variables=['experience', 'education']
+    )
+
+    llm = AzureChatOpenAI(
+        deployment_name=os.getenv("DEPLOYMENT_NAME")
+    )
+
+    chain = LLMChain(llm=llm,
+                     prompt=prompt, )
+
+    return chain.run(experience=experience, education=education)
+
+
+def get_questions(ability: str, role: str):
+    template = """You are now a human resources manager, based on the provided ability summary of the candidate from your assistant, you
     have to generate a set of interview questions that can evaluate if the applicant is suitable to the applied role. Please try
     to think about interview questions that related to the role and can examine the past experience of the candidate. 
 
-    First set of data is the applicant's past job experience. The second set of data is education of the applicant. The third set of data is the applied role of the candidate. 
+    First set of data is the applicant's summary. The second set of data is the applied role of the candidate. 
     
     Output Example 1:
     '{{
@@ -103,11 +139,8 @@ def get_questions(experience: str, education: str, role: str):
        
     Lets start!
     
-    Experience:
-    {experience}
-    
-    Education:
-    {education}
+    Ability:
+    {ability}
     
     applied role:
     {role}
@@ -117,7 +150,7 @@ def get_questions(experience: str, education: str, role: str):
 
     prompt = PromptTemplate(
         template=template,
-        input_variables=['experience', 'education', 'role']
+        input_variables=['ability', 'role']
     )
 
     llm = AzureChatOpenAI(
@@ -127,7 +160,7 @@ def get_questions(experience: str, education: str, role: str):
     chain = LLMChain(llm=llm,
                      prompt=prompt, )
 
-    return chain.run(experience=experience, education=education, role=role)
+    return chain.run(ability=ability, role=role)
 
 
 @dataclass
