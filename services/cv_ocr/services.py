@@ -36,7 +36,7 @@ def get_document_data(txt: str):
     Output the candidate name, applied role, phone number, gender, job experiences, educations, age.
     You have to strictly follow the output format.
 
-    Output example :
+    Output example 1 (All information provided):
     '{{ 
     "candidate name": "Patrick Star",
     "applied role": "Senior software engineer",
@@ -49,6 +49,20 @@ def get_document_data(txt: str):
     "educations": "Hong Kong University",
     "age": "25",
     }}'
+
+    Output example 2 (missing partial information):
+    '{{ 
+    "candidate name": "Patrick Star",
+    "applied role": "Senior software engineer",
+    "phone number": "Not mentioned",
+    "gender": "male",
+    "job experiences": "Senior Software Engineer, Microsoft, Los Angeles, CA August 2019-Current
+    Manage a software engineering team of 15+ personnel to build innovative web applications using Agile-Waterfall methodologies, oversee all aspects of full-stack development, and identify opportunities to enhance the user experience
+    Identify creative solutions and workflow optimizations to improve deployment timelines and reduce project roadblocks during development lifecycles
+    Serve as the Microsoft Azure SME for the software engineering department and resolve escalated sodftware issues from junior team members",
+    "educations": "Hong Kong University",
+    "age": "Not mentioned",
+    }}'    
 
     Information:
     {txt}
