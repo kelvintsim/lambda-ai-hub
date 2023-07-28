@@ -38,11 +38,11 @@ def get_document_data(txt: str):
 
     Output example 1 (All information provided):
     '{{ 
-    "candidate name": "Patrick Star",
-    "applied role": "Senior software engineer",
-    "phone number": "6777 8888",
+    "candidate_name": "Patrick Star",
+    "applied_role": "Senior software engineer",
+    "phone_number": "6777 8888",
     "gender": "male",
-    "job experiences": "Senior Software Engineer, Microsoft, Los Angeles, CA August 2019-Current
+    "job_experiences": "Senior Software Engineer, Microsoft, Los Angeles, CA August 2019-Current
     Manage a software engineering team of 15+ personnel to build innovative web applications using Agile-Waterfall methodologies, oversee all aspects of full-stack development, and identify opportunities to enhance the user experience
     Identify creative solutions and workflow optimizations to improve deployment timelines and reduce project roadblocks during development lifecycles
     Serve as the Microsoft Azure SME for the software engineering department and resolve escalated sodftware issues from junior team members",
@@ -52,11 +52,11 @@ def get_document_data(txt: str):
 
     Output example 2 (missing partial information):
     '{{ 
-    "candidate name": "Patrick Star",
-    "applied role": "Senior software engineer",
-    "phone number": "Not mentioned",
+    "candidate_name": "Patrick Star",
+    "applied_role": "Senior software engineer",
+    "phone_number": "Not mentioned",
     "gender": "male",
-    "job experiences": "Senior Software Engineer, Microsoft, Los Angeles, CA August 2019-Current
+    "job_experiences": "Senior Software Engineer, Microsoft, Los Angeles, CA August 2019-Current
     Manage a software engineering team of 15+ personnel to build innovative web applications using Agile-Waterfall methodologies, oversee all aspects of full-stack development, and identify opportunities to enhance the user experience
     Identify creative solutions and workflow optimizations to improve deployment timelines and reduce project roadblocks during development lifecycles
     Serve as the Microsoft Azure SME for the software engineering department and resolve escalated sodftware issues from junior team members",
