@@ -4,7 +4,7 @@ import json
 def get_experience(cv):
     cv_data = get_document_data(get_azure_ocr_data(cv))
     
-    cv_experience = json.loads(json.loads(cv_data.content))
+    cv_experience = json.loads(cv_data)
     
     experience = cv_experience["job_experiences"] 
     
