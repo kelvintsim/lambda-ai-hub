@@ -9,11 +9,15 @@ def get_experience(event, context):
     
     cv_experience = json.loads(cv_data)
     
+    print(cv_experience)
+    
     experience = cv_experience["job_experiences"] 
     
     education = cv_experience["educations"]
     
     ability = cv_summarizer(experience, education)
+    
+    print(ability)
     
     return ability
     
