@@ -219,7 +219,3 @@ class AzureUrlOcr(AzureOcr):
         }
         return json.dumps(data)
 
-
-
-
-

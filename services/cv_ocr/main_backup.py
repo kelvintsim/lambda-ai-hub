@@ -1,36 +1,31 @@
 from services import get_document_data, get_questions, get_azure_ocr_data, cv_summarizer
-from boto3 import client as boto3_client
 import json 
 
-lambda_client = boto3_client('lambda', region_name="ap-southeast-1",)
-
-def trigger_get_questions(event, context):
-    image = event["body"]["img_path"]
-    role = event["body"]["role"]
-    lambda_client.invoke(
-        FunctionName="get_questions",
-        InvocationType='Event',
-        Payload={
-            "image": image,
-            "role": role
-        }
-    )
+def get_experience(event, context):
     
-def get_questions(event, context):
-    
-    url = event["body"]["image"]
-    
-    role = event["body"]["role"]
+    url = event["body"]["img_path"]
     
     cv_data = get_document_data(get_azure_ocr_data(url))
     
     cv_experience = json.loads(cv_data)
-
+    
+    print(cv_experience)
+    
     experience = cv_experience["job_experiences"] 
     
     education = cv_experience["educations"]
     
     ability = cv_summarizer(experience, education)
+    
+    print(ability)
+    
+    return ability
+    
+def questions(event, context):
+    
+    role = event["body"]["role"]
+    
+    ability = event["body"]["ability"]
     
     response = get_questions(ability, role)
     
