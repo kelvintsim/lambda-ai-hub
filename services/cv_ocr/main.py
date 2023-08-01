@@ -20,9 +20,9 @@ def trigger_get_questions(event, context):
 def get_questions(event, context):
     print(event)
     
-    url = json.loads(event["image"])
+    url = event["image"]
     
-    role = json.loads(event["role"])
+    role = event["role"]
     
     cv_data = get_document_data(get_azure_ocr_data(url))
     
