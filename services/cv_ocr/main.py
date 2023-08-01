@@ -18,6 +18,7 @@ def trigger_get_questions(event, context):
     )
     
 def get_questions(event, context):
+    print(event)
     
     url = json.loads(event["body"]["image"])
     
