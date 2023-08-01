@@ -37,15 +37,15 @@ def get_questions(event, context):
     
     ability = cv_summarizer(experience, education)
     
-    response = get_questions(ability, role)
+    # response = get_questions(ability, role)
     
     print(ability)
     
-    print(response)
+    # print(response)
     
-    requests.post("https://www.lancode.com/workflow/api/v1/public/webhooks/NjRjOGNjNWZmMzFjZjIwNWRjNTU1ZTU2", json = {})
+    # requests.post("https://www.lancode.com/workflow/api/v1/public/webhooks/NjRjOGNjNWZmMzFjZjIwNWRjNTU1ZTU2", json = {})
     
-    return response
+    return ability
 
 def parse(event, context):
     img_path = event["body"]["img_path"]
