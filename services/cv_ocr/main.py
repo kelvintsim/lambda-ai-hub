@@ -7,13 +7,14 @@ lambda_client = boto3_client('lambda', region_name="ap-southeast-1",)
 def trigger_get_questions(event, context):
     image = event["body"]["img_path"]
     role = event["body"]["role"]
-    lambda_client.invoke(
-        FunctionName="get_questions",
-        InvocationType='Event',
-        Payload={
+    cv_info = {
             "image": image,
             "role": role
         }
+    lambda_client.invoke(
+        FunctionName="get_questions",
+        InvocationType='Event',
+        Payload= json.dumps(cv_info)
     )
     
 def get_questions(event, context):
