@@ -1,6 +1,7 @@
 from services import get_document_data, get_questions, get_azure_ocr_data, cv_summarizer
 from boto3 import client as boto3_client
 import json 
+import requests
 
 lambda_client = boto3_client('lambda', region_name="ap-southeast-1",)
 
@@ -21,8 +22,10 @@ def get_questions(event, context):
     print(event)
     
     url = event["image"]
+    print(url)
     
     role = event["role"]
+    print(role)    
     
     cv_data = get_document_data(get_azure_ocr_data(url))
     
@@ -40,12 +43,14 @@ def get_questions(event, context):
     
     print(response)
     
+    requests.post("https://www.lancode.com/workflow/api/v1/public/webhooks/NjRjOGNjNWZmMzFjZjIwNWRjNTU1ZTU2", json = {})
+    
     return response
 
 def parse(event, context):
     img_path = event["body"]["img_path"]
     
-    cv_data = get_document_data(get_azure_ocr_data(img_path)) 
+    cv_data = get_document_data(get_azure_ocr_data(img_path))
     
     print(cv_data)
     
