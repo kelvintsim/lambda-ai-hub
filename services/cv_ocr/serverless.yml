@@ -11,14 +11,14 @@ functions:
           path: "/cv_questions"
           method: post
           integration: lambda
-  cv_trigger:
-    handler: main.trigger_get_questions
-    timeout: 60
-    events:
-      - http:
-          path: "/cv_trigger"
-          method: post
-          integration: lambda
+  # cv_trigger:
+  #   handler: main.trigger_get_questions
+  #   timeout: 60
+  #   events:
+  #     - http:
+  #         path: "/cv_trigger"
+  #         method: post
+  #         integration: lambda
   cv_ocr:
     handler: main.parse
     timeout: 30
