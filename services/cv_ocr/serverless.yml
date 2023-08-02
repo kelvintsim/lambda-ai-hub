@@ -3,20 +3,20 @@ service: cv-ocr
 frameworkVersion: '3'
 
 functions:
-  cv_trigger:
-    handler: main.trigger_get_questions
-    timeout: 60
-    events:
-      - http:
-          path: "/cv_trigger"
-          method: post
-          integration: lambda
   cv_question:
     handler: main.questions
     timeout: 60
     events:
       - http:
           path: "/cv_questions"
+          method: post
+          integration: lambda
+  cv_trigger:
+    handler: main.trigger_get_questions
+    timeout: 60
+    events:
+      - http:
+          path: "/cv_trigger"
           method: post
           integration: lambda
   cv_ocr:
