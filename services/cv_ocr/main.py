@@ -19,13 +19,13 @@ def trigger_get_questions(event, context):
     )
     
 def get_questions(event, context):
-    print(event)
+    print(type(event))
     
     url = event["image"]
     print(url)
     
     role = event["role"]
-    print(role)    
+    print(role)
     
     cv_data = get_document_data(get_azure_ocr_data(url))
     
@@ -36,7 +36,7 @@ def get_questions(event, context):
     education = cv_experience["educations"]
     
     ability = cv_summarizer(experience, education)
-    print(event)  
+    print(event)
     response = get_questions(ability, role)
     
     print(ability)
