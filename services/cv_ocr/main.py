@@ -18,8 +18,7 @@ def trigger_get_questions(event, context):
         Payload= json.dumps(cv_info)
     )
     
-def get_questions(event, context):
-    print(type(event))
+def questions(event, context):
     
     url = event["image"]
     print(url)
@@ -36,11 +35,11 @@ def get_questions(event, context):
     education = cv_experience["educations"]
     
     ability = cv_summarizer(experience, education)
-    print(event)
+    
     response = get_questions(ability, role)
     
     print(ability)
-    print(event)
+    
     print(response)
     
     # requests.post("https://www.lancode.com/workflow/api/v1/public/webhooks/NjRjOGNjNWZmMzFjZjIwNWRjNTU1ZTU2", json = {})
