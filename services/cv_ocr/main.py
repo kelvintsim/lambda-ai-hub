@@ -25,6 +25,7 @@ def trigger_get_questions(event, context):
         InvocationType='Event',
         Payload= json.dumps(cv_info)
     )
+    return cv_info
     
 def questions(event, context):
     
