@@ -3,7 +3,7 @@ from boto3 import client as boto3_client
 import json 
 import requests
 
-lambda_client = boto3_client('lambda', region_name="ap-southeast-1",)
+lambda_client = boto3_client('lambda', region_name="ap-southeast-1")
 
 def trigger_get_questions(event, context):
     print(event)
@@ -41,7 +41,7 @@ def questions(event, context):
     
     print(ability)
     
-    print(response)
+    print(type(response))
     
     # requests.post("https://www.lancode.com/workflow/api/v1/public/webhooks/NjRjOGNjNWZmMzFjZjIwNWRjNTU1ZTU2", json = {})
     
