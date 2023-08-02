@@ -6,6 +6,7 @@ import requests
 lambda_client = boto3_client('lambda', region_name="ap-southeast-1",)
 
 def trigger_get_questions(event, context):
+    print(event)
     image = event["body"]["img_path"]
     role = event["body"]["role"]
     cv_info = {
