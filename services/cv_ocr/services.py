@@ -124,7 +124,7 @@ def get_questions(ability: str, role: str):
     First set of data is the applicant's summary. The second set of data is the applied role of the candidate. 
     
     Output Example 1:
-    {
+    {{
         "1": "As a Principal Security Consultant, you must have dealt with various security weaknesses in different systems. How do you think this experience will benefit you in the role of a computer scientist, and how would you approach integrating security measures into software development processes?",
         "2": "In your current position, you've tested a wide range of applications and technologies for security vulnerabilities with high accuracy. How do you plan to leverage your expertise in security testing to ensure the robustness and resilience of computer programs you develop or work with?",
         "3": "As an AI-focused computer scientist, how have you utilized artificial intelligence and machine learning in your previous projects or security assessments to enhance the identification and mitigation of security risks?",
@@ -135,7 +135,7 @@ def get_questions(ability: str, role: str):
         "8": "As a computer scientist, problem-solving skills are crucial. Can you share an example of a complex technical problem you encountered in your previous roles, how you tackled it, and what were the outcomes?",
         "9": "Collaboration and teamwork are often required in computer science research and development. Tell us about an experience where you worked closely with a team to achieve a common goal, and how you contributed to the success of the project.",
         "10": "Technology is continuously evolving, and keeping up with advancements is vital. How do you stay updated with the latest trends and breakthroughs in both computer science and AI, and how do you see this continuous learning benefiting your future projects?"
-    }
+    }}
     === End of example 1
        
     Lets start!
