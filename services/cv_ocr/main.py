@@ -36,7 +36,7 @@ def get_questions(event, context):
     education = cv_experience["educations"]
     
     ability = cv_summarizer(experience, education)
-    
+    print(event)  
     response = get_questions(ability, role)
     
     print(ability)
