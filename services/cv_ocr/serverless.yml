@@ -12,7 +12,7 @@ functions:
           method: post
           integration: lambda
   cv_question:
-    handler: main.get_questions
+    handler: main.questions
     timeout: 60
     events:
       - http:
