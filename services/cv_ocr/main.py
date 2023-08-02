@@ -40,7 +40,7 @@ def get_questions(event, context):
     response = get_questions(ability, role)
     
     print(ability)
-    
+    print(event)
     print(response)
     
     # requests.post("https://www.lancode.com/workflow/api/v1/public/webhooks/NjRjOGNjNWZmMzFjZjIwNWRjNTU1ZTU2", json = {})
