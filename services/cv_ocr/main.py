@@ -39,16 +39,17 @@ def questions(event, context):
     
     response = get_questions(ability, role)
     
+    questions = json.loads(response)
     print(ability)
     print(response)
     print(type(response))
     
-    questions = response.update(event)
+    cv_questions = questions.update(event)
     
-    print(questions)
+    print(cv_questions)
     # requests.post("https://www.lancode.com/workflow/api/v1/public/webhooks/NjRjOGNjNWZmMzFjZjIwNWRjNTU1ZTU2", json = {})
     
-    return questions
+    return cv_questions
 
 def parse(event, context):
     img_path = event["body"]["img_path"]
