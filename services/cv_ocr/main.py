@@ -2,8 +2,15 @@ from services import get_document_data, get_questions, get_azure_ocr_data, cv_su
 from boto3 import client as boto3_client
 import json 
 import requests
+import os 
 
 lambda_client = boto3_client('lambda', region_name="ap-southeast-1")
+
+headers = {
+    "X-APP-KEY": os.getenv("X_APP_KEY"),
+    "X-APP-SIGN": os.getenv("X_APP_SIGN"),
+    "Content-Type": "application/json"
+}
 
 def trigger_get_questions(event, context):
     print(event)
@@ -22,10 +29,8 @@ def trigger_get_questions(event, context):
 def questions(event, context):
     
     url = event["image"]
-    print(url)
-    
+        
     role = event["role"]
-    print(role)
     
     cv_data = get_document_data(get_azure_ocr_data(url))
     
@@ -40,16 +45,26 @@ def questions(event, context):
     response = get_questions(ability, role)
     
     questions = json.loads(response)
-    print(ability)
-    print(response)
-    print(type(response))
     
-    cv_questions = questions.update(event)
+    cv_questions = event | questions
     
-    print(cv_questions)
-    # requests.post("https://www.lancode.com/workflow/api/v1/public/webhooks/NjRjOGNjNWZmMzFjZjIwNWRjNTU1ZTU2", json = {})
+    test = requests.get("https://api.lancode.com/worksheet/api/v1/open/worksheets/64c245c31fba346dc58353c1/records/", headers = headers)
     
-    return cv_questions
+    result = list(test.json()["data"]["records"][0]["fields"])
+    
+    fields = result[:-5]
+    
+    questions_list = zip(fields, cv_questions.values())
+    
+    value = {"fields": dict(questions_list)}
+    
+    print(value)
+
+    code = requests.post("https://api.lancode.com/worksheet/api/v1/open/worksheets/64c245c31fba346dc58353c1/records/", headers = headers, data = json.dumps(value))
+    
+    print(code.json())
+    
+    return code
 
 def parse(event, context):
     img_path = event["body"]["img_path"]
