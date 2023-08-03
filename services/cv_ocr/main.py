@@ -51,9 +51,9 @@ def questions(event, context):
     
     cv_questions = event | questions
     
-    test = requests.get("https://api.lancode.com/worksheet/api/v1/open/worksheets/64c245c31fba346dc58353c1/records/", headers = headers)
+    test = requests.get("https://api.lancode.com/worksheet/api/v1/open/worksheets/64c245c31fba346dc58353c1", headers = headers)
     
-    result = list(test.json()["data"]["records"][0]["fields"])
+    result = list(value["id"] for value in test.json()["data"]["components"])
     
     fields = result[:-5]
     
