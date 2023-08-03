@@ -30,8 +30,10 @@ def trigger_get_questions(event, context):
 def questions(event, context):
     
     url = event["image"]
+    print(url)
         
     role = event["role"]
+    print(role)
     
     cv_data = get_document_data(get_azure_ocr_data(url))
     
@@ -58,14 +60,12 @@ def questions(event, context):
     questions_list = zip(fields, cv_questions.values())
     
     value = {"fields": dict(questions_list)}
-    
-    print(value)
 
     code = requests.post("https://api.lancode.com/worksheet/api/v1/open/worksheets/64c245c31fba346dc58353c1/records/", headers = headers, data = json.dumps(value))
     
     print(code.json())
     
-    return code
+    return code.json()
 
 def parse(event, context):
     img_path = event["body"]["img_path"]
