@@ -35,22 +35,26 @@ def ask_description(json: str) -> str:
     system_prompt = (
         "Here is the image caption generated from Azure AI service for an image. "
         "Tell the user about the image with natural language to help him visualise it. "
+        "Please only use 5 words or phrases to describe the content, main theme or categories of the photos. "
         "Don't mention that it is from Azure AI service. '.\n\n"
     )
-    sample_response = (
-        "In the image, there is a scene captured with multiple elements. "
-        "Towards the center, there is a man operating a tractor in a farm or field. "
-        "The tractor is in motion, with the man riding on it. "
-        "The image also contains a slightly blurry tree, positioned on the left side of the frame. "
-        "The background showcases a clear blue sky above a hill. "
-        "The overall composition suggests a rural setting with agricultural activities taking place."
+    sample_response_1 = (
+        "Gorgeous women, Sunny day, Money, beach, Endless sea"
+    )
+    
+    sample_response_2 = (
+        "Coding with computer, frustrated engineer, messy desk, bright environment, desolate"
     )
 
     chatgpt_data = {
         "messages": [
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": sample_json},
-            {"role": "assistant", "content": sample_response},
+            {"role": "assistant", "content": sample_response_1},
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": sample_json},
+            {"role": "assistant", "content": sample_response_2},
+            {"role": "system", "content": system_prompt},
             {"role": "user", "content": json},
         ],
         "max_tokens": 800,
