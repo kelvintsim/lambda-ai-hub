@@ -16,9 +16,11 @@ def trigger_get_questions(event, context):
     print(event)
     image = event["body"]["img_path"]
     role = event["body"]["role"]
+    record_id = event["body"]["record_id"]
     cv_info = {
             "image": image,
-            "role": role
+            "role": role,
+            "record_id": record_id
         }
     lambda_client.invoke(
         FunctionName=os.getenv("FUNCTION_NAME"),
@@ -34,6 +36,12 @@ def questions(event, context):
         
     role = event["role"]
     print(role)
+    
+    record_id = event["record_id"]
+    print(record_id)
+    
+    worksheet_id = os.getenv("WORKSHEET_ID")
+    print(worksheet_id)
     
     cv_data = get_document_data(get_azure_ocr_data(url))
     
@@ -52,7 +60,7 @@ def questions(event, context):
     
     cv_questions = event | questions
     
-    test = requests.get("https://api.lancode.com/worksheet/api/v1/open/worksheets/64c245c31fba346dc58353c1", headers = headers)
+    test = requests.get("https://api.lancode.com/worksheet/api/v1/open/worksheets/{worksheet_id}", headers = headers)
     
     result = list(value["id"] for value in test.json()["data"]["components"])
     
@@ -62,7 +70,7 @@ def questions(event, context):
     
     value = {"fields": dict(questions_list)}
 
-    code = requests.post("https://api.lancode.com/worksheet/api/v1/open/worksheets/64c245c31fba346dc58353c1/records/", headers = headers, data = json.dumps(value))
+    code = requests.put("https://api.lancode.com/worksheet/api/v1/open/worksheets/{worksheet_id}/records/{record_id}", headers = headers, data = json.dumps(value))
     
     print(code.json())
     

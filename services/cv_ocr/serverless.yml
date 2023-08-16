@@ -14,6 +14,7 @@ functions:
     environment: 
       X_APP_KEY: ${env:X_APP_KEY}
       X_APP_SIGN: ${env:X_APP_SIGN}
+      WORKSHEET_ID: ${env:PROD_WORKSHEET_ID}      
   cv_question_dev:
     handler: main.questions
     timeout: 60
@@ -25,6 +26,7 @@ functions:
     environment: 
       X_APP_KEY: ${env:DEV_X_APP_KEY}
       X_APP_SIGN: ${env:DEV_X_APP_SIGN}
+      WORKSHEET_ID: ${env:DEV_WORKSHEET_ID}
   cv_trigger_prod:
     handler: main.trigger_get_questions
     timeout: 60
