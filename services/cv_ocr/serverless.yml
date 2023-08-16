@@ -25,14 +25,26 @@ functions:
     environment: 
       X_APP_KEY: ${env:DEV_X_APP_KEY}
       X_APP_SIGN: ${env:DEV_X_APP_SIGN}
-  cv_trigger:
+  cv_trigger_prod:
     handler: main.trigger_get_questions
     timeout: 60
     events:
       - http:
-          path: "/cv_trigger"
+          path: "/cv_trigger_prod"
           method: post
           integration: lambda
+    environment:
+      FUNCTION_NAME: ${env:PROD_CV_QUESTION}
+  cv_trigger_dev:
+    handler: main.trigger_get_questions
+    timeout: 60
+    events:
+      - http:
+          path: "/cv_trigger_dev"
+          method: post
+          integration: lambda
+    environment:
+      FUNCTION_NAME: ${env:DEV_CV_QUESTION}
   cv_ocr:
     handler: main.parse
     timeout: 30

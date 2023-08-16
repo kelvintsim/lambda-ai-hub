@@ -21,7 +21,7 @@ def trigger_get_questions(event, context):
             "role": role
         }
     lambda_client.invoke(
-        FunctionName="cv-ocr-dev-cv_question",
+        FunctionName=os.getenv("FUNCTION_NAME"),
         InvocationType='Event',
         Payload= json.dumps(cv_info)
     )
