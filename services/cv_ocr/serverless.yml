@@ -3,14 +3,28 @@ service: cv-ocr
 frameworkVersion: '3'
 
 functions:
-  cv_question:
+  cv_question_prod:
     handler: main.questions
     timeout: 60
     events:
       - http:
-          path: "/cv_questions"
+          path: "/cv_questions_prod"
           method: post
           integration: lambda
+    environment: 
+      X_APP_KEY: ${env:X_APP_KEY}
+      X_APP_SIGN: ${env:X_APP_SIGN}
+  cv_question_dev:
+    handler: main.questions
+    timeout: 60
+    events:
+      - http:
+          path: "/cv_questions_dev"
+          method: post
+          integration: lambda
+    environment: 
+      X_APP_KEY: ${env:DEV_X_APP_KEY}
+      X_APP_SIGN: ${env:DEV_X_APP_SIGN}
   cv_trigger:
     handler: main.trigger_get_questions
     timeout: 60
@@ -62,5 +76,3 @@ provider:
     DEPLOYMENT_NAME: ${env:AZURE_OPENAI_DEPLOYMENT}
     AZURE_VISION_KEY: ${env:AZURE_VISION_KEY}
     AZURE_VISION_ENDPOINT: ${env:AZURE_VISION_ENDPOINT}
-    X_APP_KEY: ${env:X_APP_KEY}
-    X_APP_SIGN: ${env:X_APP_SIGN}
