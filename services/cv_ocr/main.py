@@ -123,9 +123,11 @@ def parse(event, context):
     
     raw_data = {raw_data_fields: cv_content}
     
+    raw_data_field = {"fields": raw_data}
+    
     print(raw_data)
     
-    raw = requests.put(f"https://api.lancode.com/worksheet/api/v1/open/worksheets/{worksheet_id}/records/{record_id}", headers = headers, data = json.dumps(raw_data))
+    raw = requests.put(f"https://api.lancode.com/worksheet/api/v1/open/worksheets/{worksheet_id}/records/{record_id}", headers = headers, data = json.dumps(raw_data_field))
     
     print(raw.json())
     
