@@ -47,9 +47,9 @@ def questions(event, context):
     
     cv_experience = json.loads(cv_data)
 
-    experience = cv_experience["job_experiences"] 
+    experience = cv_experience["workExperience"] 
     
-    education = cv_experience["educations"]
+    education = cv_experience["Education"]
     
     ability = cv_summarizer(experience, education)
     print(ability)
@@ -85,20 +85,44 @@ def trigger_ocr(event, context):
             "record_id": record_id
         }
     lambda_client.invoke(
-        FunctionName=os.getenv("OCR_FUNCTION_NAME"),
+        FunctionName=os.getenv("FUNCTION_NAME"),
         InvocationType='Event',
         Payload= json.dumps(cv_info)
     )
     return cv_info
 
 def parse(event, context):
-    img_path = event["body"]["img_path"]
+    url = event["image"]
+    print(url)
+        
+    role = event["role"]
+    print(role)
     
-    cv_data = get_document_data(get_azure_ocr_data(img_path))
+    record_id = event["record_id"]
+    print(record_id)
     
-    print(cv_data)
+    worksheet_id = os.getenv("OCR_WORKSHEET_ID")
+    print(worksheet_id)
     
-    return cv_data
+    cv_data = get_document_data(get_azure_ocr_data(url))
+    
+    cv_content = json.loads(cv_data)
+    
+    test = requests.get(f"https://api.lancode.com/worksheet/api/v1/open/worksheets/{worksheet_id}", headers = headers)
+    
+    print(test.json())
+    
+    result = list(value["id"] for value in test.json()["data"]["components"])
+    
+    fields = result[1:-5]
+    
+    cv_info = zip(fields, cv_content.values())
+    
+    value = {"fields": dict(cv_info)}
+
+    code = requests.put(f"https://api.lancode.com/worksheet/api/v1/open/worksheets/{worksheet_id}/records/{record_id}", headers = headers, data = json.dumps(value))
+    
+    print(code.json())
 
 
 # class Event:

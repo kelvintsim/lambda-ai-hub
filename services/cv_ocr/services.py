@@ -35,28 +35,30 @@ def get_document_data(txt: str):
     The following information in table structure. The last column is the text and first 4 columns are the corresponding 
     location of the text on the document.
     Output the candidate name, applied role, phone number, gender, job experiences, educations, age.
-    You have to strictly follow the output format.
+    You have to strictly follow the output format. Please output M for male and F for female for sex.
 
     Output example 1 (All information provided):
     '{{ 
-    "candidate_name": "Patrick Star",
+    "name": "Patrick Star",
+    "mobile": "6777 8888",
+    "email": "patrick@gmail.com",
+    "sex": "male",
+    "workExperience": "Senior Software Engineer, Microsoft, Los Angeles, CA August 2019-Current Manage a software engineering team of 15+ personnel to build innovative web applications using Agile-Waterfall methodologies, oversee all aspects of full-stack development, and identify opportunities to enhance the user experience Identify creative solutions and workflow optimizations to improve deployment timelines and reduce project roadblocks during development lifecycles Serve as the Microsoft Azure SME for the software engineering department and resolve escalated sodftware issues from junior team members",
+    "lastCompanyName": "Yoov technology limited",
+    "Education": "Hong Kong University - Bachelor in computer science"
     "applied_role": "Senior software engineer",
-    "phone_number": "6777 8888",
-    "gender": "male",
-    "job_experiences": "Senior Software Engineer, Microsoft, Los Angeles, CA August 2019-Current Manage a software engineering team of 15+ personnel to build innovative web applications using Agile-Waterfall methodologies, oversee all aspects of full-stack development, and identify opportunities to enhance the user experience Identify creative solutions and workflow optimizations to improve deployment timelines and reduce project roadblocks during development lifecycles Serve as the Microsoft Azure SME for the software engineering department and resolve escalated sodftware issues from junior team members",
-    "educations": "Hong Kong University",
-    "age": "25",
     }}'
 
     Output example 2 (missing partial information):
     '{{ 
-    "candidate_name": "Patrick Star",
-    "applied_role": "Senior software engineer",
-    "phone_number": "Not mentioned",
-    "gender": "male",
-    "job_experiences": "Senior Software Engineer, Microsoft, Los Angeles, CA August 2019-Current Manage a software engineering team of 15+ personnel to build innovative web applications using Agile-Waterfall methodologies, oversee all aspects of full-stack development, and identify opportunities to enhance the user experience. Identify creative solutions and workflow optimizations to improve deployment timelines and reduce project roadblocks during development lifecycles. Serve as the Microsoft Azure SME for the software engineering department and resolve escalated sodftware issues from junior team members",
-    "educations": "Hong Kong University",
-    "age": "Not mentioned",
+    "name": "Patrick Star",
+    "mobile": "6777 8888",
+    "email": "patrick@gmail.com",
+    "sex": "male",
+    "workExperience": "Senior Software Engineer, Microsoft, Los Angeles, CA August 2019-Current Manage a software engineering team of 15+ personnel to build innovative web applications using Agile-Waterfall methodologies, oversee all aspects of full-stack development, and identify opportunities to enhance the user experience Identify creative solutions and workflow optimizations to improve deployment timelines and reduce project roadblocks during development lifecycles Serve as the Microsoft Azure SME for the software engineering department and resolve escalated sodftware issues from junior team members",
+    "lastCompanyName": "not mentioned",
+    "Education": "Hong Kong University - Bachelor in computer science"
+    "applied_role": "not mentioned",
     }}'    
 
     Information:
