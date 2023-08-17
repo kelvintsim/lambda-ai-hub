@@ -98,7 +98,7 @@ def parse(event, context):
     record_id = event["record_id"]
     print(record_id)
     
-    worksheet_id = os.getenv("OCR_WORKSHEET_ID")
+    worksheet_id = os.getenv("WORKSHEET_ID")
     print(worksheet_id)
     
     cv_data = get_document_data(get_azure_ocr_data(url))
