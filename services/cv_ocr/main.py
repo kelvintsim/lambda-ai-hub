@@ -60,7 +60,7 @@ def questions(event, context):
     
     cv_questions = event | questions
     
-    test = requests.get("https://api.lancode.com/worksheet/api/v1/open/worksheets/{worksheet_id}", headers = headers)
+    test = requests.get(f"https://api.lancode.com/worksheet/api/v1/open/worksheets/{worksheet_id}", headers = headers)
     
     print(test.json())
     
@@ -72,7 +72,7 @@ def questions(event, context):
     
     value = {"fields": dict(questions_list)}
 
-    code = requests.put("https://api.lancode.com/worksheet/api/v1/open/worksheets/{worksheet_id}/records/{record_id}", headers = headers, data = json.dumps(value))
+    code = requests.put(f"https://api.lancode.com/worksheet/api/v1/open/worksheets/{worksheet_id}/records/{record_id}", headers = headers, data = json.dumps(value))
     
     print(code.json())
     
