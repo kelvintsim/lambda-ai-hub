@@ -121,7 +121,7 @@ def parse(event, context):
     
     print(raw_data_fields)
     
-    raw_data = {raw_data_fields: cv_content}
+    raw_data = {raw_data_fields: cv_data}
     
     raw_data_field = {"fields": raw_data}
     
