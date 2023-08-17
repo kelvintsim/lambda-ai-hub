@@ -58,17 +58,15 @@ def questions(event, context):
     
     questions = json.loads(response)
     
-    cv_questions = event | questions
-    
     test = requests.get(f"https://api.lancode.com/worksheet/api/v1/open/worksheets/{worksheet_id}", headers = headers)
     
     print(test.json())
     
     result = list(value["id"] for value in test.json()["data"]["components"])
     
-    fields = result[:-5]
+    fields = result[2:-5]
     
-    questions_list = zip(fields, cv_questions.values())
+    questions_list = zip(fields, questions.values())
     
     value = {"fields": dict(questions_list)}
 
@@ -77,6 +75,21 @@ def questions(event, context):
     print(code.json())
     
     return code.json()
+
+def trigger_ocr(event, context):
+    print(event)
+    image = event["body"]["img_path"]
+    record_id = event["body"]["record_id"]
+    cv_info = {
+            "image": image,
+            "record_id": record_id
+        }
+    lambda_client.invoke(
+        FunctionName=os.getenv("OCR_FUNCTION_NAME"),
+        InvocationType='Event',
+        Payload= json.dumps(cv_info)
+    )
+    return cv_info
 
 def parse(event, context):
     img_path = event["body"]["img_path"]
