@@ -94,9 +94,6 @@ def trigger_ocr(event, context):
 def parse(event, context):
     url = event["image"]
     print(url)
-        
-    role = event["role"]
-    print(role)
     
     record_id = event["record_id"]
     print(record_id)
