@@ -123,7 +123,7 @@ def parse(event, context):
     
     raw = requests.put(f"https://api.lancode.com/worksheet/api/v1/open/worksheets/{worksheet_id}/records/{record_id}", headers = headers, data = json.dumps(raw_data))
     
-    print(raw,json())
+    print(raw.json())
     
     return(code.json())
 
