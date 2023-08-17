@@ -60,8 +60,6 @@ def questions(event, context):
     
     test = requests.get(f"https://api.lancode.com/worksheet/api/v1/open/worksheets/{worksheet_id}", headers = headers)
     
-    print(test.json())
-    
     result = list(value["id"] for value in test.json()["data"]["components"])
     
     fields = result[2:-5]
@@ -107,19 +105,27 @@ def parse(event, context):
     
     test = requests.get(f"https://api.lancode.com/worksheet/api/v1/open/worksheets/{worksheet_id}", headers = headers)
     
-    print(test.json())
-    
     result = list(value["id"] for value in test.json()["data"]["components"])
     
-    fields = result[1:-5]
+    cv_fields = result[1:-6]
     
-    cv_info = zip(fields, cv_content.values())
+    cv_info = zip(cv_fields, cv_content.values())
     
     value = {"fields": dict(cv_info)}
 
     code = requests.put(f"https://api.lancode.com/worksheet/api/v1/open/worksheets/{worksheet_id}/records/{record_id}", headers = headers, data = json.dumps(value))
-    
+
     print(code.json())
+    
+    raw_data_fields = result[-6]
+    
+    raw_data = {raw_data_fields: cv_content}
+    
+    raw = requests.put(f"https://api.lancode.com/worksheet/api/v1/open/worksheets/{worksheet_id}/records/{record_id}", headers = headers, data = json.dumps(raw_data))
+    
+    print(raw,json())
+    
+    return(code.json())
 
 
 # class Event:
