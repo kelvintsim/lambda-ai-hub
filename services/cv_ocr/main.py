@@ -62,6 +62,8 @@ def questions(event, context):
     
     test = requests.get("https://api.lancode.com/worksheet/api/v1/open/worksheets/{worksheet_id}", headers = headers)
     
+    print(test.json())
+    
     result = list(value["id"] for value in test.json()["data"]["components"])
     
     fields = result[:-5]
