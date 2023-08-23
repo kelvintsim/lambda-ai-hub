@@ -11,8 +11,8 @@ import json
 from langchain.schema import HumanMessage
 from langchain.tools import format_tool_to_openai_function
 
-# import dotenv
-# dotenv.load_dotenv()
+import dotenv
+dotenv.load_dotenv()
 
 
 def get_azure_ocr_data(img_path):
@@ -34,7 +34,7 @@ def get_document_data(txt: str):
     template = """Base on the following information, try you best to guess the information in the resume.
     The following information in table structure. The last column is the text and first 4 columns are the corresponding 
     location of the text on the document.
-    Output the candidate name, applied role, phone number, gender, job experiences, educations, age.
+    Output the candidate name, applied role, phone number, gender, job experiences, educations, age. Please seperate the candidates' working experience and education in the entendedInfo section.
     You have to strictly follow the output format. Please output M for male and F for female for sex.
 
     Output example 1 (All information provided):
@@ -45,8 +45,34 @@ def get_document_data(txt: str):
     "sex": "male",
     "workExperience": "Senior Software Engineer, Microsoft, Los Angeles, CA August 2019-Current Manage a software engineering team of 15+ personnel to build innovative web applications using Agile-Waterfall methodologies, oversee all aspects of full-stack development, and identify opportunities to enhance the user experience Identify creative solutions and workflow optimizations to improve deployment timelines and reduce project roadblocks during development lifecycles Serve as the Microsoft Azure SME for the software engineering department and resolve escalated sodftware issues from junior team members",
     "lastCompanyName": "Yoov technology limited",
-    "Education": "Hong Kong University - Bachelor in computer science"
+    "Education": "Hong Kong University - Bachelor in computer science",
     "applied_role": "Senior software engineer",
+    "extendInfo": {
+        "experiences": [
+            {{
+                "companyName": "Yoov technology limited",
+                "title": "Senior Software Engineer",
+                "lastSalary": "20000"
+                "startDate": "2023-05-09"
+                "endedDate": "2023-05-28",  
+            }},
+            {{
+                "companyName": "Microsoft",
+                "title": "Senior Software Engineer",
+                "lastSalary": "40000"
+                "startDate": "2019-05-09"
+                "endedDate": "2019-05-28",  
+            }}
+        ],
+        "educations": [
+            {{
+                "schoolName": "Hong Kong University",
+                "subject": "Bachelor in computer science",
+                "educationLevel": "Bachelor",
+                "startedDate": "2018-05-09",
+                "endedDate": "2015-05-09",
+            }}
+        ]
     }}'
 
     Output example 2 (missing partial information):
@@ -57,7 +83,7 @@ def get_document_data(txt: str):
     "sex": "male",
     "workExperience": "Senior Software Engineer, Microsoft, Los Angeles, CA August 2019-Current Manage a software engineering team of 15+ personnel to build innovative web applications using Agile-Waterfall methodologies, oversee all aspects of full-stack development, and identify opportunities to enhance the user experience Identify creative solutions and workflow optimizations to improve deployment timelines and reduce project roadblocks during development lifecycles Serve as the Microsoft Azure SME for the software engineering department and resolve escalated sodftware issues from junior team members",
     "lastCompanyName": "not mentioned",
-    "Education": "Hong Kong University - Bachelor in computer science"
+    "Education": "Hong Kong University - Bachelor in computer science",
     "applied_role": "not mentioned",
     }}'    
 
