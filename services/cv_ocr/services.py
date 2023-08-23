@@ -47,20 +47,20 @@ def get_document_data(txt: str):
     "lastCompanyName": "Yoov technology limited",
     "Education": "Hong Kong University - Bachelor in computer science",
     "applied_role": "Senior software engineer",
-    "extendInfo": {
+    "extendInfo": {{
         "experiences": [
             {{
                 "companyName": "Yoov technology limited",
                 "title": "Senior Software Engineer",
-                "lastSalary": "20000"
-                "startDate": "2023-05-09"
+                "lastSalary": "20000",
+                "startDate": "2023-05-09",
                 "endedDate": "2023-05-28",  
             }},
             {{
                 "companyName": "Microsoft",
                 "title": "Senior Software Engineer",
-                "lastSalary": "40000"
-                "startDate": "2019-05-09"
+                "lastSalary": "40000",
+                "startDate": "2019-05-09",
                 "endedDate": "2019-05-28",  
             }}
         ],
@@ -73,6 +73,7 @@ def get_document_data(txt: str):
                 "endedDate": "2015-05-09",
             }}
         ]
+    }}
     }}'
 
     Output example 2 (missing partial information):
