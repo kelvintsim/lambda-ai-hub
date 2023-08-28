@@ -11,14 +11,27 @@ functions:
           path: "/foodimage_generate"
           method: post
           integration: lambda
-  food-image-get:
+  food-image-get-dev:
     handler: handler.getphoto_handler
     timeout: 30
     events:
       - http:
-          path: "/foodimage_get"
+          path: "/foodimage_get_dev"
           method: post
           integration: lambda
+    environment:
+      GET_N8N_ENDPOINT: ${env:DEV_GET_N8N_ENDPOINT}
+  food-image-get-prod:
+    handler: handler.getphoto_handler
+    timeout: 30
+    events:
+      - http:
+          path: "/foodimage_get_prod"
+          method: post
+          integration: lambda
+    environment:
+      GET_N8N_ENDPOINT: ${env:PROD_GET_N8N_ENDPOINT}
+
     
 package:
   exclude:
@@ -45,4 +58,3 @@ provider:
     MIDJOURNEY_ACCOUNT: ${env:MIDJOURNEY_ACCOUNT}
     MIDJOURNEY_PASSWORD: ${env:MIDJOURNEY_PASSWORD}
     GENERATE_N8N_ENDPOINT: ${env:GENERATE_N8N_ENDPOINT}
-    GET_N8N_ENDPOINT: ${env:GET_N8N_ENDPOINT}
