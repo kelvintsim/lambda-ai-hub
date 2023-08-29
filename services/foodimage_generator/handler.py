@@ -26,14 +26,16 @@ def genphoto_handler(event: EventDict, context) -> dict[str, str]:
     task_id = get_id(prompt)
     return task_id
 
-def get_photo(taskId: str) -> dict[str, str]:
+def get_photo(taskId: str, rowId: str):
     get_photo_url = urljoin(get_n8n_url, taskId)
-    image = requests.get(get_photo_url, auth=(account, password), json={})
+    print(get_photo_url)
+    image = requests.post(get_photo_url, auth=(account, password), json={"rowId": rowId})
     print(image)
     image_id = image.json()
     return image_id
 
 def getphoto_handler(event: EventDict, context) -> dict[str, str]:
     image = event["body"]["taskId"]
-    image_id = get_photo(image)
+    record = event["body"]["rowId"]
+    image_id = get_photo(image, record)
     return image_id
