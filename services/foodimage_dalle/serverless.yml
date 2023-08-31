@@ -1,0 +1,50 @@
+app: food-image-generator
+service: food-image-generator
+frameworkVersion: '3'
+
+functions:
+  food-image-generate-dev:
+    handler: handler.genphoto_handler
+    timeout: 30   
+    events:
+      - http:
+          path: "/foodimage_dalle_dev"
+          method: post
+          integration: lambda
+    environment:
+      GET_N8N_ENDPOINT: ${env:DEV_N8N_DALLE_ENDPOINT}          
+  food-image-generate-prod:
+    handler: handler.genphoto_handler
+    timeout: 30   
+    events:
+      - http:
+          path: "/foodimage_dalle_prod"
+          method: post
+          integration: lambda
+    environment:
+      GET_N8N_ENDPOINT: ${env:PROD_N8N_DALLE_ENDPOINT}
+
+package:
+  exclude:
+    - '!node_modules/**'
+    - '!venv/**'
+    - '!package-lock.json/**'
+    
+plugins:
+  - serverless-python-requirements  
+
+custom:
+  pythonRequirements:
+    pythonBin: python3
+
+provider:
+  name: aws
+  runtime: python3.9
+  architecture: x86_64
+  region: ap-southeast-1
+  apiGateway:
+    restApiId: jo4yphs17g
+    restApiRootResourceId: 9kl7ci3plk
+  environment: 
+    MIDJOURNEY_ACCOUNT: ${env:MIDJOURNEY_ACCOUNT}
+    MIDJOURNEY_PASSWORD: ${env:MIDJOURNEY_PASSWORD}
