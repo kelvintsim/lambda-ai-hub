@@ -11,8 +11,6 @@ services:
     path: ./services/background_search
   foodimage_dalle:
     path: ./services/foodimage_dalle
-  foodimage_generator:
-    path: ./services/foodimage_generator
   interview_questions:
     path: ./services/interview_question
   sick_leave_document:
