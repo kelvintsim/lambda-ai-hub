@@ -14,7 +14,8 @@ gen_n8n_url = Config.GET_N8N_ENDPOINT
 
 def genphoto_handler(event: EventDict, context) -> dict[str, str]:
     prompt = event["body"]["prompt"]
+    record = event["body"]["rowId"]
     gen_photo_url = urljoin(gen_n8n_url, prompt)
-    response = requests.post(gen_photo_url, auth=(account, password), json={})
+    response = requests.post(gen_photo_url, auth=(account, password), json={"rowId": record})
     print(response.json())
     return response.json()
