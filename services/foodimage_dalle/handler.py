@@ -13,6 +13,7 @@ password = Config.MIDJOURNEY_PASSWORD
 gen_n8n_url = Config.GET_N8N_ENDPOINT
 
 def genphoto_handler(event: EventDict, context) -> dict[str, str]:
+    print(event)
     prompt = event["body"]["prompt"]
     record = event["body"]["rowId"]
     gen_photo_url = urljoin(gen_n8n_url, prompt)
