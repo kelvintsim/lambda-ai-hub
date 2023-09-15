@@ -15,6 +15,7 @@ from langchain.tools import format_tool_to_openai_function
 # dotenv.load_dotenv()
 
 def get_result_url(response):
+    print(response.headers)
     return response.headers["Operation-Location"]
 
 
