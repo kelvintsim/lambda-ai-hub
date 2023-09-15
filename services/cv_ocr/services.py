@@ -16,7 +16,6 @@ from langchain.tools import format_tool_to_openai_function
 
 def get_result_url(response):
     print(response)
-    print(response.json())
     print(response.headers)
     return response.headers["Operation-Location"]
 
@@ -26,10 +25,10 @@ def get_azure_ocr_data(img_path):
         endpoint=os.getenv("AZURE_FORM_ENDPOINT"),
         api_key=os.getenv("AZURE_FORM_KEY")
     )
-    if not validators.url(img_path):
-        engine = AzureOcr(config=config)
-    else:
-        engine = AzureUrlOcr(config=config)
+    # if not validators.url(img_path):
+    #     engine = AzureOcr(config=config)
+    # else:
+    engine = AzureUrlOcr(config=config)
 
     # result = engine.ocr(img_path)['readResult']['content']
     response = engine.ocr(img_path) 
