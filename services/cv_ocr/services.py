@@ -15,7 +15,7 @@ from langchain.tools import format_tool_to_openai_function
 # dotenv.load_dotenv()
 
 def get_result_url(response):
-    return response.headers["operation-Location"]
+    return response.headers["Operation-Location"]
 
 
 def get_azure_ocr_data(img_path):
