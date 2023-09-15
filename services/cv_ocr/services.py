@@ -1,6 +1,6 @@
 import os
 # import dotenv
-
+import time
 import requests
 import validators
 from langchain import PromptTemplate, LLMChain
@@ -14,20 +14,40 @@ from langchain.tools import format_tool_to_openai_function
 # import dotenv
 # dotenv.load_dotenv()
 
+def get_result_url(response):
+    return response.headers["operation-Location"]
+
 
 def get_azure_ocr_data(img_path):
     config = AzureOcrConfig(
-        endpoint=os.getenv("AZURE_VISION_ENDPOINT"),
-        api_key=os.getenv("AZURE_VISION_KEY")
+        endpoint=os.getenv("AZURE_FORM_ENDPOINT"),
+        api_key=os.getenv("AZURE_FORM_KEY")
     )
     if not validators.url(img_path):
         engine = AzureOcr(config=config)
     else:
         engine = AzureUrlOcr(config=config)
 
-    result = engine.ocr(img_path)['readResult']['content']
+    # result = engine.ocr(img_path)['readResult']['content']
+    response = engine.ocr(img_path) 
+    
+    result_url = get_result_url(response)
 
-    return result
+    retry = 0
+    
+    limit = 10 
+    
+    while retry < limit:
+        result = requests.get(result_url, headers={"Ocp-Apim-Subscription-Key": config.api_key })
+        
+        result_json = result.json()
+        
+        if result_json["status"] == "succeeded":
+            return result_json["analyzeResult"]["content"]
+        else:
+            time.sleep(0.5)
+            retry = retry + 1
+    print("Failed to retrieve CV data")
 
 
 def get_document_data(txt: str):
@@ -212,9 +232,8 @@ class AzureOcr:
 
     def _get_url(self) -> str:
         endpoint = self._config.endpoint
-        api_version = '2023-02-01-preview'
-        language = 'en'
-        path = f'computervision/imageanalysis:analyze?api-version={api_version}&features=read&language={language}'
+        api_version = '2022-08-31'
+        path= f'formrecognizer/documentModels/prebuilt-read:analyze?api-version={api_version}'
         url = requests.compat.urljoin(endpoint, path)
         return url
 
