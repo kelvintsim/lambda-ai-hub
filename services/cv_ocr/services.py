@@ -230,7 +230,7 @@ class AzureOcr:
         headers = self._get_headers()
         data = self._get_data(image_path)
         response = requests.post(url, headers=headers, data=data)
-        return response.json()
+        return response
 
     def _get_url(self) -> str:
         endpoint = self._config.endpoint
