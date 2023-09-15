@@ -265,7 +265,7 @@ class AzureUrlOcr(AzureOcr):
 
     def _get_data(self, image_url: str) -> str:
         data = {
-            'url': image_url
+            'urlSource': image_url
         }
         return json.dumps(data)
 
