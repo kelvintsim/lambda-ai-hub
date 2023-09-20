@@ -1,6 +1,8 @@
 import os
 # import dotenv
 import time
+
+import filetype
 import requests
 import validators
 from langchain import PromptTemplate, LLMChain
@@ -10,6 +12,7 @@ import json
 
 from langchain.schema import HumanMessage
 from langchain.tools import format_tool_to_openai_function
+
 
 # import dotenv
 # dotenv.load_dotenv()
@@ -21,6 +24,8 @@ def get_result_url(response):
 
 
 def get_azure_ocr_data(img_path):
+
+
     config = AzureOcrConfig(
         endpoint=os.getenv("AZURE_FORM_ENDPOINT"),
         api_key=os.getenv("AZURE_FORM_KEY")
@@ -31,19 +36,19 @@ def get_azure_ocr_data(img_path):
     engine = AzureUrlOcr(config=config)
 
     # result = engine.ocr(img_path)['readResult']['content']
-    response = engine.ocr(img_path) 
-    
+    response = engine.ocr(img_path)
+
     result_url = get_result_url(response)
 
     retry = 0
-    
-    limit = 10 
-    
+
+    limit = 10
+
     while retry < limit:
-        result = requests.get(result_url, headers={"Ocp-Apim-Subscription-Key": config.api_key })
-        
+        result = requests.get(result_url, headers={"Ocp-Apim-Subscription-Key": config.api_key})
+
         result_json = result.json()
-        
+
         if result_json["status"] == "succeeded":
             return result_json["analyzeResult"]["content"]
         else:
@@ -129,6 +134,7 @@ def get_document_data(txt: str):
                      prompt=prompt)
 
     return chain.run(txt=txt)
+
 
 def cv_summarizer(experience: str, education: str):
     template = """You are now a human resources manager assistant, based on the provided experience and education from the candidate, you
@@ -235,7 +241,7 @@ class AzureOcr:
     def _get_url(self) -> str:
         endpoint = self._config.endpoint
         api_version = '2022-08-31'
-        path= f'formrecognizer/documentModels/prebuilt-read:analyze?api-version={api_version}'
+        path = f'formrecognizer/documentModels/prebuilt-read:analyze?api-version={api_version}'
         url = requests.compat.urljoin(endpoint, path)
         return url
 
@@ -268,4 +274,3 @@ class AzureUrlOcr(AzureOcr):
             'urlSource': image_url
         }
         return json.dumps(data)
-
