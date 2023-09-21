@@ -97,6 +97,9 @@ def questions(event, context):
 
     fields = get_questions_id_from_components(test.json()["data"]["components"])
 
+    print("question ids: ", fields)
+    print("questions: ", questions.values())
+
     questions_list = zip(fields, questions.values())
 
     value = {"fields": dict(questions_list)}
