@@ -48,9 +48,16 @@ def trigger_get_questions(event, context):
 
 
 def get_questions_id_from_components(components) -> List[str]:
-    questions = (
-        'Question 1', 'Question 2', 'Question 3', 'Question 4', 'Question 5', 'Question 5', 'Question 6', 'Question 6',
-        'Question 7', 'Question 8', 'Question 9', 'Question 10')
+    questions = ('Question 1',
+                 'Question 2',
+                 'Question 3',
+                 'Question 4',
+                 'Question 5',
+                 'Question 6',
+                 'Question 7',
+                 'Question 8',
+                 'Question 9',
+                 'Question 10')
 
     result = []
 
