@@ -120,7 +120,12 @@ def parse(event, context):
     worksheet_id = os.getenv("WORKSHEET_ID")
     print(worksheet_id)
 
+    if url_is_word_document(url):
+        url = convert_word_document_to_pdf(url)
+
     cv_data = get_document_data(get_azure_ocr_data(url))
+
+    print("cv_data: ", cv_data)
 
     cv_content = json.loads(cv_data)
 
