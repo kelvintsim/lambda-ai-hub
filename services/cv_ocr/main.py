@@ -1,3 +1,5 @@
+from typing import List
+
 from services import get_document_data, get_questions, get_azure_ocr_data, cv_summarizer
 from boto3 import client as boto3_client
 import json
@@ -45,6 +47,21 @@ def trigger_get_questions(event, context):
     return cv_info
 
 
+def get_questions_id_from_components(components) -> List[str]:
+    questions = (
+        'Question 1', 'Question 2', 'Question 3', 'Question 4', 'Question 5', 'Question 5', 'Question 6', 'Question 6',
+        'Question 7', 'Question 8', 'Question 9', 'Question 10')
+
+    result = []
+
+    for q in questions:
+        for c in components:
+            if q in c["name"]:
+                result.append(c["id"])
+                break
+    return result
+
+
 def questions(event, context):
     url = event["image"]
     print(url)
@@ -78,9 +95,7 @@ def questions(event, context):
 
     test = requests.get(f"https://api.lancode.com/worksheet/api/v1/open/worksheets/{worksheet_id}", headers=headers)
 
-    result = list(value["id"] for value in test.json()["data"]["components"])
-
-    fields = result[2:-5]
+    fields = get_questions_id_from_components(test.json()["data"]["components"])
 
     questions_list = zip(fields, questions.values())
 
