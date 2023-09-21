@@ -2,7 +2,6 @@ import os
 # import dotenv
 import time
 
-import filetype
 import requests
 import validators
 from langchain import PromptTemplate, LLMChain
