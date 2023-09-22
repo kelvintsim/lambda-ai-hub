@@ -12,9 +12,10 @@ import json
 from langchain.schema import HumanMessage
 from langchain.tools import format_tool_to_openai_function
 
-
 # import dotenv
+#
 # dotenv.load_dotenv()
+
 
 def get_result_url(response):
     print(response)
@@ -23,12 +24,11 @@ def get_result_url(response):
 
 
 def get_azure_ocr_data(img_path):
-
-
     config = AzureOcrConfig(
         endpoint=os.getenv("AZURE_FORM_ENDPOINT"),
         api_key=os.getenv("AZURE_FORM_KEY")
     )
+
     # if not validators.url(img_path):
     #     engine = AzureOcr(config=config)
     # else:
@@ -36,6 +36,8 @@ def get_azure_ocr_data(img_path):
 
     # result = engine.ocr(img_path)['readResult']['content']
     response = engine.ocr(img_path)
+
+    print('response: ', response)
 
     result_url = get_result_url(response)
 
@@ -80,14 +82,14 @@ def get_document_data(txt: str):
                 "title": "Senior Software Engineer",
                 "lastSalary": "20000",
                 "startDate": "2023-05-09",
-                "endedDate": "2023-05-28",  
+                "endedDate": "2023-05-28"
             }},
             {{
                 "companyName": "Microsoft",
                 "title": "Senior Software Engineer",
                 "lastSalary": "40000",
                 "startDate": "2019-05-09",
-                "endedDate": "2019-05-28",  
+                "endedDate": "2019-05-28" 
             }}
         ],
         "educations": [
@@ -96,7 +98,7 @@ def get_document_data(txt: str):
                 "subject": "Bachelor in computer science",
                 "educationLevel": "Bachelor",
                 "startedDate": "2018-05-09",
-                "endedDate": "2015-05-09",
+                "endedDate": "2015-05-09"
             }}
         ]
     }}
@@ -111,7 +113,7 @@ def get_document_data(txt: str):
     "workExperience": "Senior Software Engineer, Microsoft, Los Angeles, CA August 2019-Current Manage a software engineering team of 15+ personnel to build innovative web applications using Agile-Waterfall methodologies, oversee all aspects of full-stack development, and identify opportunities to enhance the user experience Identify creative solutions and workflow optimizations to improve deployment timelines and reduce project roadblocks during development lifecycles Serve as the Microsoft Azure SME for the software engineering department and resolve escalated sodftware issues from junior team members",
     "lastCompanyName": "not mentioned",
     "Education": "Hong Kong University - Bachelor in computer science",
-    "applied_role": "not mentioned",
+    "applied_role": "not mentioned"
     }}'    
 
     Information:
@@ -232,6 +234,7 @@ class AzureOcr:
 
     def ocr(self, image_path: str):
         url = self._get_url()
+
         headers = self._get_headers()
         data = self._get_data(image_path)
         response = requests.post(url, headers=headers, data=data)
@@ -242,6 +245,7 @@ class AzureOcr:
         api_version = '2022-08-31'
         path = f'formrecognizer/documentModels/prebuilt-read:analyze?api-version={api_version}'
         url = requests.compat.urljoin(endpoint, path)
+        print("url is: ", url)
         return url
 
     def _get_headers(self) -> dict:
