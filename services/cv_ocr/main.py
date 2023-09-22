@@ -164,6 +164,7 @@ def parse(event, context):
             print("cv_data: ", cv_data)
 
             cv_content = json.loads(cv_data)
+            break
 
         except Exception as e:
             print("get llm error: ", e)
