@@ -1,4 +1,5 @@
-from typing import List
+import time
+from typing import List, Tuple
 
 from services import get_document_data, get_questions, get_azure_ocr_data, cv_summarizer
 from boto3 import client as boto3_client
@@ -47,23 +48,12 @@ def trigger_get_questions(event, context):
     return cv_info
 
 
-def get_questions_id_from_components(components) -> List[str]:
-    questions = ('Question 1',
-                 'Question 2',
-                 'Question 3',
-                 'Question 4',
-                 'Question 5',
-                 'Question 6',
-                 'Question 7',
-                 'Question 8',
-                 'Question 9',
-                 'Question 10')
-
+def get_questions_id_from_components(component_name_list: Tuple, components) -> List[str]:
     result = []
 
-    for q in questions:
+    for name in component_name_list:
         for c in components:
-            if q in c["name"]:
+            if name in c["name"]:
                 result.append(c["id"])
                 break
     return result
@@ -102,7 +92,17 @@ def questions(event, context):
 
     test = requests.get(f"https://api.lancode.com/worksheet/api/v1/open/worksheets/{worksheet_id}", headers=headers)
 
-    fields = get_questions_id_from_components(test.json()["data"]["components"])
+    fields = get_questions_id_from_components(('Question 1',
+                                               'Question 2',
+                                               'Question 3',
+                                               'Question 4',
+                                               'Question 5',
+                                               'Question 6',
+                                               'Question 7',
+                                               'Question 8',
+                                               'Question 9',
+                                               'Question 10'),
+                                              test.json()["data"]["components"])
 
     print("question ids: ", fields)
     print("questions: ", questions.values())
@@ -148,41 +148,77 @@ def parse(event, context):
     if url_is_word_document(url):
         url = convert_word_document_to_pdf(url)
 
-    cv_data = get_document_data(get_azure_ocr_data(url))
+    azure_ocr_data = get_azure_ocr_data(url)
 
-    print("cv_data: ", cv_data)
+    get_llm_tries = 0
+    get_llm_limit = 3
+    time.sleep(1)
 
-    cv_content = json.loads(cv_data)
+    cv_content = None
+
+    while get_llm_tries < get_llm_limit:
+        try:
+
+            cv_data = get_document_data(azure_ocr_data)
+
+            print("cv_data: ", cv_data)
+
+            cv_content = json.loads(cv_data)
+
+        except Exception as e:
+            print("get llm error: ", e)
+            get_llm_tries += 1
+            time.sleep(0.5)
+            continue
 
     test = requests.get(f"https://api.lancode.com/worksheet/api/v1/open/worksheets/{worksheet_id}", headers=headers)
 
-    result = list(value["id"] for value in test.json()["data"]["components"])
+    # result = list(value["id"] for value in test.json()["data"]["components"])
 
-    cv_fields = result[1:-6]
+    # cv_fields = result[1:-6]
+
+    cv_field_names = ('name',
+                      'mobile',
+                      'email',
+                      'sex',
+                      'workExperience',
+                      'lastCompanyName',
+                      'Education',
+                      'applied_role')
+
+    cv_fields = get_questions_id_from_components(cv_field_names,
+                                                 test.json()["data"]["components"])
 
     cv_info = zip(cv_fields, cv_content.values())
 
-    value = {"fields": dict(cv_info)}
+    fields = dict(cv_info)
+
+    raw_data_column_id = get_questions_id_from_components(("raw data",),
+                                                          test.json()["data"]["components"])
+
+    fields[raw_data_column_id] = cv_content
+
+    value = {"fields": fields}
 
     code = requests.put(f"https://api.lancode.com/worksheet/api/v1/open/worksheets/{worksheet_id}/records/{record_id}",
                         headers=headers, data=json.dumps(value))
 
     print(code.json())
 
-    raw_data_fields = result[-6]
-
-    print(raw_data_fields)
-
-    raw_data = {raw_data_fields: cv_data}
-
-    raw_data_field = {"fields": raw_data}
-
-    print(raw_data)
-
-    raw = requests.put(f"https://api.lancode.com/worksheet/api/v1/open/worksheets/{worksheet_id}/records/{record_id}",
-                       headers=headers, data=json.dumps(raw_data_field))
-
-    print(raw.json())
+    # raw_data_fields = result[-6]
+    #
+    # print(raw_data_fields)
+    #
+    # raw_data = {raw_data_fields: cv_data}
+    #
+    # raw_data_field = {"fields": raw_data}
+    #
+    # print(raw_data)
+    #
+    # raw = requests.put(f"https://api.lancode.com/worksheet/api/v1/open/worksheets/{worksheet_id}/records/{record_id}",
+    #                    headers=headers, data=json.dumps(raw_data_field))
+    #
+    # print(raw.json())
 
     return (code.json())
 
