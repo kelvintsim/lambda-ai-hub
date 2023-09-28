@@ -2,6 +2,7 @@ from typing import TypedDict
 import requests
 from requests.compat import urljoin
 from config import Config
+import json
 
 
 class EventDict(TypedDict):
@@ -83,7 +84,7 @@ def ask_questions(role: str) -> str:
     }
     chatgpt_response = requests.post(chatgpt_url, headers=chatgpt_headers, json=chatgpt_data)
     chatgpt_message = chatgpt_response.json()["choices"][0]["message"]["content"]
-    interview_questions = chatgpt_message.strip('"')
+    interview_questions = json.loads(chatgpt_message)
     return interview_questions
 
 def get_lambda_response(questions: str) -> dict[str, str]:

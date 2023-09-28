@@ -5,7 +5,7 @@ frameworkVersion: '3'
 functions:
   cv_question_prod:
     handler: main.questions
-    timeout: 60
+    timeout: 90
     events:
       - http:
           path: "/cv_questions_prod"
