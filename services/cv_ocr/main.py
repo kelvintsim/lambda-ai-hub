@@ -197,7 +197,7 @@ def parse(event, context):
     raw_data_column_id = get_questions_id_from_components(("raw data",),
                                                           test.json()["data"]["components"])
 
-    fields[raw_data_column_id[0]] = cv_content
+    fields[raw_data_column_id[0]] = cv_data
 
     value = {"fields": fields}
 
